@@ -56,6 +56,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,6 +83,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/hold_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +93,7 @@
     <TextView
         android:id="@+id/computer_cards"
         android:layout_width="213dp"
-        android:layout_height="79dp"
+        android:layout_height="141dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -98,41 +101,9 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/computer_name"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/computer_score"
-        android:layout_width="94dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toEndOf="@+id/computer_cards"
-        app:layout_constraintTop_toBottomOf="@+id/computer_name"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/game_status_message"
-        android:layout_width="223dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/computer_cards"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.518" />
 
 </android.support.constraint.ConstraintLayout>

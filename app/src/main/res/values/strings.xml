@@ -4,4 +4,5 @@
     <string name="hit_text">Hit</string>
     <string name="hold_text">Hold</string>
     <string name="computer_name">Computer</string>
+    <string name="play_again_text">Play Again</string>
 </resources>

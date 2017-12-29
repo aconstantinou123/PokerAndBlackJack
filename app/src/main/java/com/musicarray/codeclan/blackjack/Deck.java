@@ -1,5 +1,6 @@
 package com.musicarray.codeclan.blackjack;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,7 +8,7 @@ import java.util.Collections;
  * Created by user on 12/28/17.
  */
 
-public class Deck {
+public class Deck implements Serializable {
 
     private ArrayList<Card> cards;
     private SuitType[] suitType;

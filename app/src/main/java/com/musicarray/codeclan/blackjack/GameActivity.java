@@ -1,5 +1,6 @@
 package com.musicarray.codeclan.blackjack;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +13,6 @@ public class GameActivity extends AppCompatActivity {
     TextView playerCards;
     TextView playerScore;
     TextView computerCards;
-    TextView computerScore;
-    TextView gameStatus;
     Button hitButton;
     Button holdButton;
     Deck deck;
@@ -43,14 +42,16 @@ public class GameActivity extends AppCompatActivity {
         playerCards = findViewById(R.id.player_cards);
         playerScore = findViewById(R.id.player_score);
         computerCards = findViewById(R.id.computer_cards);
-        computerScore = findViewById(R.id.computer_score);
-        gameStatus = findViewById(R.id.game_status_message);
-        gameStatus.setText(gameMaster.getGameStatus());
         playerName.setText(player.getName());
         playerCards.setText(player.getHand().viewCards());
         playerScore.setText(player.getHandValue().toString());
         computerCards.setText(computer.getHand().viewComputerCards());
-        computerScore.setText(computer.computerHandValue().toString());
+        gameMaster.checkWinner();
+        if(gameMaster.getWinState() == true){
+            Intent intent = new Intent(this, ResultActivity.class);
+            intent.putExtra("gameMaster", gameMaster);
+            startActivity(intent);
+        }
     }
 
     public void onHitButtonClicked(View button){
@@ -59,9 +60,12 @@ public class GameActivity extends AppCompatActivity {
             playerCards.setText(player.getHand().viewCards());
             playerScore.setText(player.getHandValue().toString());
             computerCards.setText(computer.getHand().viewComputerCards());
-            computerScore.setText(computer.computerHandValue().toString());
             gameMaster.checkWinner();
-            gameStatus.setText(gameMaster.getGameStatus());
+                if(gameMaster.getWinState() == true){
+                    Intent intent = new Intent(this, ResultActivity.class);
+                    intent.putExtra("gameMaster", gameMaster);
+                    startActivity(intent);
+                }
 
     }
 
@@ -69,9 +73,12 @@ public class GameActivity extends AppCompatActivity {
         player.setHoldStatus(true);
         computer.computerTakeCard(deck);
         computerCards.setText(computer.getHand().viewComputerCards());
-        computerScore.setText(computer.computerHandValue().toString());
         gameMaster.checkWinner();
-        gameStatus.setText(gameMaster.getGameStatus());
+        if(gameMaster.getWinState() == true){
+            Intent intent = new Intent(this, ResultActivity.class);
+            intent.putExtra("gameMaster", gameMaster);
+            startActivity(intent);
+        }
     }
 
 

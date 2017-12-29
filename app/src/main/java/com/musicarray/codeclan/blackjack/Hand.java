@@ -1,12 +1,13 @@
 package com.musicarray.codeclan.blackjack;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by user on 12/28/17.
  */
 
-public class Hand {
+public class Hand implements Serializable {
 
     private ArrayList<Card> cardsHeld;
 

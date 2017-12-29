@@ -1,10 +1,12 @@
 package com.musicarray.codeclan.blackjack;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 12/28/17.
  */
 
-public class Computer {
+public class Computer implements Serializable {
 
     private Hand hand;
     private boolean holdStatus;

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.musicarray.codeclan.blackjack.ResultActivity">
+
+    <TextView
+        android:id="@+id/result_player_name"
+        android:layout_width="299dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/result_player_cards"
+        android:layout_width="177dp"
+        android:layout_height="78dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/computer_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_player_name"
+        app:layout_constraintVertical_bias="0.592" />
+
+    <TextView
+        android:id="@+id/computer_name"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="156dp"
+        android:text="@string/computer_name"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_player_name" />
+
+    <TextView
+        android:id="@+id/result_computer_cards"
+        android:layout_width="171dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/play_again_button"
+        app:layout_constraintEnd_toStartOf="@+id/result_computer_score"
+        app:layout_constraintHorizontal_bias="0.744"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/computer_name"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/result_player_score"
+        android:layout_width="102dp"
+        android:layout_height="78dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/computer_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toEndOf="@+id/result_player_cards"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796" />
+
+    <TextView
+        android:id="@+id/result_game_status_message"
+        android:layout_width="299dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/play_again_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_computer_cards"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/play_again_button"
+        android:layout_width="126dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onPlayAgainButtonClicked"
+        android:text="@string/play_again_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_status_message" />
+
+    <TextView
+        android:id="@+id/result_computer_score"
+        android:layout_width="110dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/result_game_status_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/computer_name"
+        app:layout_constraintVertical_bias="0.75" />
+</android.support.constraint.ConstraintLayout>
