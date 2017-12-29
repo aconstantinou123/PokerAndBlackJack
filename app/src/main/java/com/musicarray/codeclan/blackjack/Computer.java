@@ -20,7 +20,7 @@ public class Computer {
             this.hand = hand;
         }
 
-    public int computerHandValue(){
+    public Integer computerHandValue(){
         return hand.getHandValue();
     }
 

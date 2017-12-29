@@ -30,7 +30,7 @@ public class Player {
         this.hand = hand;
     }
 
-    public int getHandValue(){
+    public Integer getHandValue(){
         return hand.getHandValue();
     }
 }

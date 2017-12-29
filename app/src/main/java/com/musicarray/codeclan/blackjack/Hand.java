@@ -51,12 +51,13 @@ public class Hand {
 
     public String viewComputerCards() {
         ArrayList<String> cards = new ArrayList<>();
-        for (Card card : cardsHeld){
+        for (Card card : cardsHeld) {
             if (card == cardsHeld.get(0)) {
                 cards.add(card.hideCard());
-            }
+            } else if (card != cardsHeld.get(0)) {
                 cards.add(card.prettyName());
             }
+        }
         StringBuilder result = new StringBuilder();
         for (String s : cards)
         {
