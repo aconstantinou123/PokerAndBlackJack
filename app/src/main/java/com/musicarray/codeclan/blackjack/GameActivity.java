@@ -2,6 +2,7 @@ package com.musicarray.codeclan.blackjack;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,18 +15,25 @@ public class GameActivity extends AppCompatActivity {
     TextView computerScore;
     Button hitButton;
     Button holdButton;
+    Deck deck;
+    Hand playerHand;
+    Hand computerHand;
+    Player player;
+    Computer computer;
+    boolean hold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        Deck deck = new Deck();
+        hold = false;
+        deck = new Deck();
         deck.populateDeck();
         deck.shuffle();
-        Hand playerHand = new Hand();
-        Player player = new Player("Melvin Cornflake", playerHand);
-        Hand computerHand = new Hand();
-        Computer computer = new Computer(computerHand);
+        playerHand = new Hand();
+        player = new Player("Melvin Cornflake", playerHand);
+        computerHand = new Hand();
+        computer = new Computer(computerHand);
         deck.deal(playerHand);
         deck.deal(playerHand);
         deck.deal(computerHand);
@@ -41,4 +49,24 @@ public class GameActivity extends AppCompatActivity {
         computerCards.setText(computer.getHand().viewComputerCards());
         computerScore.setText(computer.computerHandValue().toString());
     }
+
+    public void onHitButtonClicked(View button){
+        if (hold == false) {
+            deck.deal(playerHand);
+            computer.computerTakeCard(deck);
+            playerCards.setText(player.getHand().viewCards());
+            playerScore.setText(player.getHandValue().toString());
+            computerCards.setText(computer.getHand().viewComputerCards());
+            computerScore.setText(computer.computerHandValue().toString());
+        }
+    }
+
+    public boolean onHoldButtonClicked(View button){
+        if (hold == false){
+            return hold = true;
+        }
+        return hold = false;
+    }
+
+
 }
