@@ -35,9 +35,9 @@ public class PlayerTest {
         assertEquals("The Ace of Hearts\n", player.getHand().viewCards());
     }
 
-//    @Test
-//    public void cangetPlayerHandValue(){
-//        deck.deal(hand);
-//        assertEquals(11, player.getHandValue());
-//    }
+    @Test
+    public void cangetPlayerHandValue(){
+        deck.deal(hand);
+        assertEquals(11, player.getHandValue(), 0.1);
+    }
 }

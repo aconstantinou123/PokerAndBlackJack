@@ -19,8 +19,8 @@ public class Hand {
         return cardsHeld;
     }
 
-    public void setCardsHeld(ArrayList<Card> cardsHeld) {
-        this.cardsHeld = cardsHeld;
+    public void addCards(Card card){
+        cardsHeld.add(card);
     }
 
     public int getHandSize(){

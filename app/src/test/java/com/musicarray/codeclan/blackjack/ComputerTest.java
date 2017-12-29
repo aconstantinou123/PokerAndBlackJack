@@ -24,23 +24,24 @@ public class ComputerTest {
         computer = new Computer(hand);
     }
 
-//    @Test
-//    public void canGetComputerHandValue(){
-//        deck.deal(hand);
-//        assertEquals(11, computer.computerHandValue());
-//    }
+    @Test
+    public void canGetComputerHandValue(){
+        deck.deal(hand);
+        assertEquals(11, computer.computerHandValue(), 0.1);
+    }
 //
-//    @Test
-//    public void willTakeCardsIfUnder16(){
-//        deck.deal(hand);
-//        computer.computerTakeCard(deck);
-//        assertEquals(13, computer.computerHandValue());
-//        computer.computerTakeCard(deck);
-//        assertEquals(16, computer.computerHandValue());
-//        computer.computerTakeCard(deck);
-//        assertEquals(20, computer.computerHandValue());
-//        computer.computerTakeCard(deck);
-//        assertEquals(20, computer.computerHandValue());
-//
-//    }
+    @Test
+    public void willTakeCardsIfUnder16(){
+        deck.deal(hand);
+        computer.computerTakeCard(deck);
+        assertEquals(13, computer.computerHandValue(),0.1);
+        computer.computerTakeCard(deck);
+        assertEquals(16, computer.computerHandValue(), 0.1);
+        computer.computerTakeCard(deck);
+        assertEquals(20, computer.computerHandValue(), 0.1);
+        computer.computerTakeCard(deck);
+        assertEquals(20, computer.computerHandValue(), 0.1);
+        assertEquals(true, computer.getHoldStatus());
+
+    }
 }

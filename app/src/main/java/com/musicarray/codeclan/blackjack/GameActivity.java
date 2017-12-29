@@ -20,13 +20,11 @@ public class GameActivity extends AppCompatActivity {
     Hand computerHand;
     Player player;
     Computer computer;
-    boolean hold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        hold = false;
         deck = new Deck();
         deck.populateDeck();
         deck.shuffle();
@@ -51,21 +49,19 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void onHitButtonClicked(View button){
-        if (hold == false) {
             deck.deal(playerHand);
             computer.computerTakeCard(deck);
             playerCards.setText(player.getHand().viewCards());
             playerScore.setText(player.getHandValue().toString());
             computerCards.setText(computer.getHand().viewComputerCards());
             computerScore.setText(computer.computerHandValue().toString());
-        }
     }
 
-    public boolean onHoldButtonClicked(View button){
-        if (hold == false){
-            return hold = true;
-        }
-        return hold = false;
+    public void onHoldButtonClicked(View button){
+        player.setHoldStatus(true);
+        computer.computerTakeCard(deck);
+        computerCards.setText(computer.getHand().viewComputerCards());
+        computerScore.setText(computer.computerHandValue().toString());
     }
 
 

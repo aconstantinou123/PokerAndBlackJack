@@ -8,10 +8,20 @@ public class Player {
 
     private String name;
     private Hand hand;
+    private boolean holdStatus;
 
     public Player(String name,Hand hand) {
         this.name = name;
         this.hand = hand;
+        this.holdStatus = false;
+    }
+
+    public boolean getHoldStatus() {
+        return holdStatus;
+    }
+
+    public void setHoldStatus(boolean holdStatus) {
+        this.holdStatus = holdStatus;
     }
 
     public String getName() {

@@ -7,10 +7,20 @@ package com.musicarray.codeclan.blackjack;
 public class Computer {
 
     private Hand hand;
+    private boolean holdStatus;
 
     public Computer(Hand hand) {
             this.hand = hand;
+            this.holdStatus = false;
         }
+
+    public boolean getHoldStatus() {
+        return holdStatus;
+    }
+
+    public void setHoldStatus(boolean holdStatus) {
+        this.holdStatus = holdStatus;
+    }
 
     public Hand getHand() {
             return hand;
@@ -28,6 +38,9 @@ public class Computer {
     public void computerTakeCard(Deck deck) {
         if(computerHandValue() <= 16){
             deck.deal(this.hand);
+        }
+        else{
+            setHoldStatus(true);
         }
     }
 }
