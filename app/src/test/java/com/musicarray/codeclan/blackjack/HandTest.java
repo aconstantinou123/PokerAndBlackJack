@@ -39,5 +39,25 @@ public class HandTest {
         assertEquals(13, hand.getHandValue());
     }
 
+    @Test
+    public void canSeeHand(){
+        deck1.deal(hand);
+        deck1.deal(hand);
+        assertEquals("The Ace of Hearts\n" +
+                "The Two of Hearts\n", hand.viewCards());
+    }
+
+    @Test
+    public void canHideCards(){
+        deck1.deal(hand);
+        deck1.deal(hand);
+        deck1.deal(hand);
+        assertEquals("Secret\n" +
+                "The Ace of Hearts\n" +
+                "The Two of Hearts\n" +
+                "The Three of Hearts\n", hand.viewComputerCards());
+    }
+
+
 
 }

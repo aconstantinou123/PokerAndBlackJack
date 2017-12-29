@@ -34,4 +34,36 @@ public class Hand {
         }
         return score;
     }
+
+    public String viewCards() {
+        ArrayList<String> cards = new ArrayList<>();
+        for (Card card : cardsHeld){
+            cards.add(card.prettyName());
+        }
+        StringBuilder result = new StringBuilder();
+        for (String s : cards)
+        {
+            result.append(s);
+            result.append("\n");
+        }
+        return result.toString();
+    }
+
+    public String viewComputerCards() {
+        ArrayList<String> cards = new ArrayList<>();
+        for (Card card : cardsHeld){
+            if (card == cardsHeld.get(0)) {
+                cards.add(card.hideCard());
+            }
+                cards.add(card.prettyName());
+            }
+        StringBuilder result = new StringBuilder();
+        for (String s : cards)
+        {
+            result.append(s);
+            result.append("\n");
+        }
+            return result.toString();
+        }
+
 }

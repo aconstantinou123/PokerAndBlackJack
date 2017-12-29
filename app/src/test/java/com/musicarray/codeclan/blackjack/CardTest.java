@@ -38,4 +38,9 @@ public class CardTest {
     public void canGetPrettyName(){
         assertEquals("The Ace of Spades", card1.prettyName());
     }
+
+    @Test
+    public void canHideCard(){
+        assertEquals("Secret", card1.hideCard());
+    }
 }

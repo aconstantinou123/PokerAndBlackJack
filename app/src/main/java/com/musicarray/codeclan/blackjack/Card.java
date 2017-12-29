@@ -33,4 +33,8 @@ public class Card {
     public String prettyName() {
         return "The " + getCardValue().prettyName + " of " + getSuitType().type;
     }
+
+    public String hideCard() {
+        return "Secret";
+    }
 }
