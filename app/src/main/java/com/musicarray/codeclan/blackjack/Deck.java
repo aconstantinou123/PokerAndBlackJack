@@ -35,4 +35,8 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
+    public void deal(Hand hand) {
+        Card topCard = cards.remove(0);
+        hand.getCardsHeld().add(topCard);
+    }
 }
