@@ -13,6 +13,7 @@ public class GameActivity extends AppCompatActivity {
     TextView playerScore;
     TextView computerCards;
     TextView computerScore;
+    TextView gameStatus;
     Button hitButton;
     Button holdButton;
     Deck deck;
@@ -20,6 +21,7 @@ public class GameActivity extends AppCompatActivity {
     Hand computerHand;
     Player player;
     Computer computer;
+    GameMaster gameMaster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
         player = new Player("Melvin Cornflake", playerHand);
         computerHand = new Hand();
         computer = new Computer(computerHand);
+        gameMaster = new GameMaster(player, computer);
         deck.deal(playerHand);
         deck.deal(playerHand);
         deck.deal(computerHand);
@@ -41,6 +44,8 @@ public class GameActivity extends AppCompatActivity {
         playerScore = findViewById(R.id.player_score);
         computerCards = findViewById(R.id.computer_cards);
         computerScore = findViewById(R.id.computer_score);
+        gameStatus = findViewById(R.id.game_status_message);
+        gameStatus.setText(gameMaster.getGameStatus());
         playerName.setText(player.getName());
         playerCards.setText(player.getHand().viewCards());
         playerScore.setText(player.getHandValue().toString());
@@ -55,6 +60,9 @@ public class GameActivity extends AppCompatActivity {
             playerScore.setText(player.getHandValue().toString());
             computerCards.setText(computer.getHand().viewComputerCards());
             computerScore.setText(computer.computerHandValue().toString());
+            gameMaster.checkWinner();
+            gameStatus.setText(gameMaster.getGameStatus());
+
     }
 
     public void onHoldButtonClicked(View button){
@@ -62,6 +70,8 @@ public class GameActivity extends AppCompatActivity {
         computer.computerTakeCard(deck);
         computerCards.setText(computer.getHand().viewComputerCards());
         computerScore.setText(computer.computerHandValue().toString());
+        gameMaster.checkWinner();
+        gameStatus.setText(gameMaster.getGameStatus());
     }
 
 
