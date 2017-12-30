@@ -30,6 +30,9 @@ public class Deck implements Serializable {
                 cards.add(new Card(cardValue[card], suitType[suit]));
             }
         }
+        for (Card card : cards){
+            card.setCardPicture();
+        }
     }
 
     public void shuffle(){

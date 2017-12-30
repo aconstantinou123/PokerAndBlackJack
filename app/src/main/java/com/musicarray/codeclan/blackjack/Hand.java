@@ -68,4 +68,12 @@ public class Hand implements Serializable {
             return result.toString();
         }
 
+    public ArrayList<String> pictureIDs() {
+        ArrayList<String> cards = new ArrayList<>();
+        for (Card card : cardsHeld){
+            cards.add(card.getCardPicture());
+        }
+       return cards;
+    }
+
 }
