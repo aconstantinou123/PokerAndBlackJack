@@ -1,6 +1,7 @@
 package com.musicarray.codeclan.blackjack;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -46,15 +47,13 @@ public class ImageAdapter extends BaseAdapter {
     }
 
 
-    // create a new ImageView for each item referenced by the Adapter
+
     public View getView(int position,View convertView,ViewGroup parent) {
         ImageView imageView;
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(120,120));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8,8,8,8);
+            convertView = inflater.inflate(R.layout.card_image, parent, false);
+            imageView = (ImageView) convertView.findViewById(R.id.card_view);
         } else {
             imageView = (ImageView) convertView;
         }
