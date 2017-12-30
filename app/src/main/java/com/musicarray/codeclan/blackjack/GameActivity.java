@@ -29,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         gridViewPlayer = findViewById(R.id.gridview_player);
-        gridViewComputer = findViewById(R.id.gridview_computer);
+        gridViewComputer = findViewById(R.id.result_gridview_computer);
         deck = new Deck();
         deck.populateDeck();
         deck.shuffle();
