@@ -22,7 +22,7 @@ public class GameActivity extends AppCompatActivity {
     Computer computer;
     GameMaster gameMaster;
     ImageAdapter playerImageAdapter;
-    ImageAdapter computerImageAdapter;
+    ComputerImageAdaptor computerImageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
         deck.deal(computerHand);
         playerImageAdapter = new ImageAdapter(this, playerHand);
         gridViewPlayer.setAdapter(playerImageAdapter);
-        computerImageAdapter = new ImageAdapter(this, computerHand);
+        computerImageAdapter = new ComputerImageAdaptor(this, computerHand);
         gridViewComputer.setAdapter(computerImageAdapter);
         playerName = findViewById(R.id.player_name);
         playerName.setText(player.getName());
