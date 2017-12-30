@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Created by user on 12/28/17.
@@ -43,4 +44,11 @@ public class CardTest {
     public void canHideCard(){
         assertEquals("Secret", card1.hideCard());
     }
+
+    @Test
+    public void canGetCardImage(){
+        card1.setCardPicture();
+        assertNotNull(card1.getCardPicture());
+    }
+
 }

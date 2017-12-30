@@ -1,5 +1,10 @@
 package com.musicarray.codeclan.blackjack;
 
+import android.media.Image;
+import android.media.ImageReader;
+import android.media.ImageWriter;
+
+import java.io.File;
 import java.io.Serializable;
 
 /**
@@ -10,10 +15,26 @@ public class Card implements Serializable {
 
     private CardValue cardValue;
     private SuitType suitType;
+    private String cardPicture;
 
     public Card(CardValue cardValue, SuitType suitType) {
         this.cardValue = cardValue;
         this.suitType = suitType;
+        this.cardPicture = null;
+    }
+
+    public String getCardPicture() {
+        return cardPicture;
+    }
+
+    public String getImage() {
+        String fileName = this.prettyName().replaceAll("\\s", "").toLowerCase();
+        return fileName;
+    }
+
+
+    public void setCardPicture() {
+        this.cardPicture = getImage();
     }
 
     public CardValue getCardValue() {
