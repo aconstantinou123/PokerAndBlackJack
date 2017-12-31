@@ -1,6 +1,7 @@
 package com.musicarray.codeclan.blackjack;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,9 +24,13 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
         playerName = findViewById(R.id.result_player_name);
+        playerName.setTypeface(typeface);
         computerName = findViewById(R.id.result_computer_name);
+        computerName.setTypeface(typeface);
         gameState = findViewById(R.id.result_game_status_message);
+        gameState.setTypeface(typeface);
         playAgainButton = findViewById(R.id.play_again_button);
         gridViewPlayer = findViewById(R.id.result_gridview_player);
         gridViewComputer = findViewById(R.id.result_gridview_computer);

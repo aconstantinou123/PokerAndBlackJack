@@ -1,6 +1,7 @@
 package com.musicarray.codeclan.blackjack;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 public class GameActivity extends AppCompatActivity {
 
     TextView playerName;
+    TextView computerName;
     Button hitButton;
     Button holdButton;
     GridView gridViewPlayer;
@@ -30,6 +32,11 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         gridViewPlayer = findViewById(R.id.gridview_player);
         gridViewComputer = findViewById(R.id.result_gridview_computer);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
+        hitButton = findViewById(R.id.hit_button);
+        hitButton.setTypeface(typeface);
+        holdButton = findViewById(R.id.hold_button);
+        holdButton.setTypeface(typeface);
         deck = new Deck();
         deck.populateDeck();
         deck.shuffle();
@@ -48,6 +55,9 @@ public class GameActivity extends AppCompatActivity {
         gridViewComputer.setAdapter(computerImageAdapter);
         playerName = findViewById(R.id.player_name);
         playerName.setText(player.getName());
+        playerName.setTypeface(typeface);
+        computerName = findViewById(R.id.computer_name);
+        computerName.setTypeface(typeface);
         gameMaster.checkWinner();
         if(gameMaster.getWinState() == true){
             Intent intent = new Intent(this, ResultActivity.class);
