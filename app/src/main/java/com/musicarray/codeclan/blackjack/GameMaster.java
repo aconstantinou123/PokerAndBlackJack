@@ -53,17 +53,20 @@ public class GameMaster implements Serializable {
     }
 
     public void checkWinner(){
-       if (player.getHandValue() == 21 && computer.computerHandValue() == 21){
+       if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
+               player.getHandValue() == 21 && computer.computerHandValue() == 21){
            setGameStatus("Everybody Wins!");
            setWinState(true);
        }
 
-       else if (computer.computerHandValue() == 21){
+       else if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
+               computer.computerHandValue() == 21){
            setGameStatus("Computer Wins!");
            setWinState(true);
        }
 
-       else if (player.getHandValue() == 21){
+       else if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
+               player.getHandValue() == 21){
             setGameStatus("You Win!");
             setWinState(true);
         }

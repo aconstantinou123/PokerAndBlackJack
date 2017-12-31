@@ -81,12 +81,13 @@
 
     <Button
         android:id="@+id/play_again_button"
-        android:layout_width="126dp"
-        android:layout_height="74dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/pokerchipbutton"
         android:onClick="onPlayAgainButtonClicked"
         android:text="@string/play_again_text"
         app:layout_constraintBottom_toBottomOf="parent"
