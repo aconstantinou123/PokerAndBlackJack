@@ -28,7 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void onPlayButtonClicked(View button){
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, PlayerNameActivity.class);
         startActivity(intent);
     }
 }

@@ -10,10 +10,9 @@
     <GridView
         android:id="@+id/result_gridview_computer"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="120dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:columnWidth="90dp"
         android:gravity="center"
@@ -32,10 +31,9 @@
     <GridView
         android:id="@+id/result_gridview_player"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="120dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:columnWidth="90dp"
         android:gravity="center"
@@ -53,14 +51,14 @@
 
     <TextView
         android:id="@+id/result_player_name"
-        android:layout_width="299dp"
-        android:layout_height="35dp"
+        android:layout_width="360dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,13 +66,13 @@
 
     <TextView
         android:id="@+id/result_computer_name"
-        android:layout_width="302dp"
-        android:layout_height="38dp"
+        android:layout_width="348dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="152dp"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_player_name" />
@@ -98,16 +96,48 @@
     <TextView
         android:id="@+id/result_game_status_message"
         android:layout_width="301dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/play_again_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_gridview_computer" />
+
+    <TextView
+        android:id="@+id/player_score"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/play_again_button"
+        app:layout_constraintEnd_toStartOf="@+id/play_again_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_game_status_message" />
+
+    <TextView
+        android:id="@+id/computer_score"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/play_again_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/play_again_button"
+        app:layout_constraintTop_toBottomOf="@+id/result_game_status_message" />
 
 </android.support.constraint.ConstraintLayout>

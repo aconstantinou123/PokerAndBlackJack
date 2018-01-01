@@ -1,6 +1,8 @@
 package com.musicarray.codeclan.blackjack;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,23 +10,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import com.google.gson.Gson;
 
 public class GameActivity extends AppCompatActivity {
 
     TextView playerName;
     TextView computerName;
+    TextView computerStatus;
     Button hitButton;
     Button holdButton;
     GridView gridViewPlayer;
     GridView gridViewComputer;
     Deck deck;
-    Hand playerHand;
-    Hand computerHand;
     Player player;
+    Hand computerHand;
     Computer computer;
     GameMaster gameMaster;
     ImageAdapter playerImageAdapter;
     ComputerImageAdaptor computerImageAdapter;
+    Score score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +44,20 @@ public class GameActivity extends AppCompatActivity {
         deck = new Deck();
         deck.populateDeck();
         deck.shuffle();
-        playerHand = new Hand();
-        player = new Player("Melvin Cornflake", playerHand);
+        Intent intent = getIntent();
+        player = (Player) intent.getSerializableExtra("player");
         computerHand = new Hand();
         computer = new Computer(computerHand);
-        gameMaster = new GameMaster(player, computer);
-        deck.deal(playerHand);
-        deck.deal(playerHand);
+        score = new Score();
+        if (intent.getSerializableExtra("score") != null){
+            score = (Score) intent.getSerializableExtra("score");
+        }
+        gameMaster = new GameMaster(player, computer, score);
+        deck.deal(player.getHand());
+        deck.deal(player.getHand());
         deck.deal(computerHand);
         deck.deal(computerHand);
-        playerImageAdapter = new ImageAdapter(this, playerHand);
+        playerImageAdapter = new ImageAdapter(this, player.getHand());
         gridViewPlayer.setAdapter(playerImageAdapter);
         computerImageAdapter = new ComputerImageAdaptor(this, computerHand);
         gridViewComputer.setAdapter(computerImageAdapter);
@@ -58,24 +66,23 @@ public class GameActivity extends AppCompatActivity {
         playerName.setTypeface(typeface);
         computerName = findViewById(R.id.computer_name);
         computerName.setTypeface(typeface);
-        gameMaster.checkWinner();
-        if(gameMaster.getWinState() == true){
-            Intent intent = new Intent(this, ResultActivity.class);
-            intent.putExtra("gameMaster", gameMaster);
-            startActivity(intent);
-        }
+        computerStatus = findViewById(R.id.computer_status);
+        computerStatus.setTypeface(typeface);
+        computerStatus.setText(computer.getComputerStatus());
     }
 
     public void onHitButtonClicked(View button){
-            deck.deal(playerHand);
+            deck.deal(player.getHand());
             gridViewPlayer.setAdapter(playerImageAdapter);
             computer.computerTakeCard(deck);
             gridViewComputer.setAdapter(computerImageAdapter);
+            computerStatus.setText(computer.getComputerStatus());
             gameMaster.checkWinner();
+            player.setHoldStatus(false);
                 if(gameMaster.getWinState() == true){
-                    Intent intent = new Intent(this, ResultActivity.class);
-                    intent.putExtra("gameMaster", gameMaster);
-                    startActivity(intent);
+                    Intent intent2 = new Intent(this, ResultActivity.class);
+                    intent2.putExtra("gameMaster", gameMaster);
+                    startActivity(intent2);
                 }
 
     }
@@ -84,11 +91,12 @@ public class GameActivity extends AppCompatActivity {
         player.setHoldStatus(true);
         computer.computerTakeCard(deck);
         gridViewComputer.setAdapter(computerImageAdapter);
+        computerStatus.setText(computer.getComputerStatus());
         gameMaster.checkWinner();
         if(gameMaster.getWinState() == true){
-            Intent intent = new Intent(this, ResultActivity.class);
-            intent.putExtra("gameMaster", gameMaster);
-            startActivity(intent);
+            Intent intent2 = new Intent(this, ResultActivity.class);
+            intent2.putExtra("gameMaster", gameMaster);
+            startActivity(intent2);
         }
     }
 

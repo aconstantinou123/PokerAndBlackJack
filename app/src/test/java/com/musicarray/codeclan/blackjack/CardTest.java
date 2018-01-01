@@ -32,7 +32,7 @@ public class CardTest {
 
     @Test
     public void canGetValueOfCard(){
-        assertEquals(11, card1.getCardValue().value);
+        assertEquals(1, card1.getCardValue().value);
     }
 
     @Test

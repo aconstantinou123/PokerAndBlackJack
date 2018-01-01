@@ -10,10 +10,12 @@ public class Computer implements Serializable {
 
     private Hand hand;
     private boolean holdStatus;
+    private String computerStatus;
 
     public Computer(Hand hand) {
             this.hand = hand;
             this.holdStatus = false;
+            this.computerStatus = "";
         }
 
     public boolean getHoldStatus() {
@@ -36,13 +38,22 @@ public class Computer implements Serializable {
         return hand.getHandValue();
     }
 
+    public String getComputerStatus() {
+        return computerStatus;
+    }
+
+    public void setComputerStatus(String computerStatus) {
+        this.computerStatus = computerStatus;
+    }
 
     public void computerTakeCard(Deck deck) {
         if(computerHandValue() <= 16){
             deck.deal(this.hand);
+            setComputerStatus("Computer takes a hit");
         }
         else{
             setHoldStatus(true);
+            setComputerStatus("Computer holds");
         }
     }
 }

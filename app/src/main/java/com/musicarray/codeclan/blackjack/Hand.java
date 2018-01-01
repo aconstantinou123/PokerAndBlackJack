@@ -28,12 +28,35 @@ public class Hand implements Serializable {
         return cardsHeld.size();
     }
 
+    public void clearHand(){
+        cardsHeld.clear();
+    }
+
     public int getHandValue() {
-        int score = 0;
-        for(Card card : cardsHeld){
-            score += card.getCardValue().getValue();
+        int lowScore = 0;
+        int highScore = 0;
+        int score;
+            for(Card card : cardsHeld){
+                lowScore += card.getCardValue().getValue();
+                highScore += card.getCardValue().getValue();
+        }
+        highScore += 10;
+        if (checkAces() == true && highScore <= 21){
+                score = highScore;
+        }
+        else {
+            score = lowScore;
         }
         return score;
+    }
+
+    public boolean checkAces(){
+        for (Card card : cardsHeld){
+            if (card.getCardValue() == CardValue.ACE){
+                return true;
+            }
+        }
+        return false;
     }
 
     public String viewCards() {

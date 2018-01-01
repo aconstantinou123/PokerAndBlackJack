@@ -12,12 +12,14 @@ public class GameMaster implements Serializable {
     private Computer computer;
     private String gameStatus;
     private boolean winState;
+    private Score score;
 
-    public GameMaster(Player player, Computer computer) {
+    public GameMaster(Player player, Computer computer, Score score) {
         this.player = player;
         this.computer = computer;
         this.gameStatus = "";
         this.winState = false;
+        this.score = score;
     }
 
     public boolean getWinState() {
@@ -52,32 +54,42 @@ public class GameMaster implements Serializable {
         this.gameStatus = gameStatus;
     }
 
+    public Score getScore() {
+        return score;
+    }
+
     public void checkWinner(){
        if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
                player.getHandValue() == 21 && computer.computerHandValue() == 21){
+           score.addPointPlayer();
+           score.addPointComputer();
            setGameStatus("Everybody Wins!");
            setWinState(true);
        }
 
        else if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
                computer.computerHandValue() == 21){
+           score.addPointComputer();
            setGameStatus("Computer Wins!");
            setWinState(true);
        }
 
        else if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
                player.getHandValue() == 21){
+            score.addPointPlayer();
             setGameStatus("You Win!");
             setWinState(true);
         }
 
        else if (player.getHandValue() > 21 && computer.computerHandValue() < 21){
+           score.addPointComputer();
            setGameStatus("You Lose. Hand over 21");
            setWinState(true);
         }
 
         else if (computer.computerHandValue() > 21 && player.getHandValue() < 21){
-           setGameStatus("You win! The computers hand is over 21");
+           score.addPointPlayer();
+           setGameStatus("You Win! The computers hand is over 21");
            setWinState(true);
         }
 
@@ -88,19 +100,23 @@ public class GameMaster implements Serializable {
 
        else if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
                computer.computerHandValue() == player.getHandValue()){
-           setGameStatus("Its a draw! Both hands are equal");
-           setWinState(true);
+             score.addPointPlayer();
+             score.addPointComputer();
+             setGameStatus("Its a draw! Both hands are equal");
+             setWinState(true);
        }
 
        else if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
                computer.computerHandValue() > player.getHandValue()){
-            setGameStatus("Computer Wins with the highest hand");
+           score.addPointComputer();
+            setGameStatus("Computer wins with the highest hand");
             setWinState(true);
        }
 
        else if (computer.getHoldStatus() == true && player.getHoldStatus() == true &&
                player.getHandValue() > computer.computerHandValue()){
-           setGameStatus("Player Wins with the highest hand");
+           score.addPointPlayer();
+           setGameStatus("Player wins with the highest hand");
            setWinState(true);
        }
     }

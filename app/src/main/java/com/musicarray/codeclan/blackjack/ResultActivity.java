@@ -1,7 +1,10 @@
 package com.musicarray.codeclan.blackjack;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.renderscript.Type;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,16 +12,24 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import static java.lang.Character.getType;
+
 public class ResultActivity extends AppCompatActivity {
 
     TextView playerName;
     TextView computerName;
     TextView gameState;
+    TextView playerScore;
+    TextView computerScore;
     Button playAgainButton;
     GridView gridViewPlayer;
     GridView gridViewComputer;
     ImageAdapter playerImageAdaptor;
     ImageAdapter computerImageAdaptor;
+    GameMaster gameMaster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +43,11 @@ public class ResultActivity extends AppCompatActivity {
         gameState = findViewById(R.id.result_game_status_message);
         gameState.setTypeface(typeface);
         playAgainButton = findViewById(R.id.play_again_button);
+        playAgainButton.setTypeface(typeface);
         gridViewPlayer = findViewById(R.id.result_gridview_player);
         gridViewComputer = findViewById(R.id.result_gridview_computer);
         Intent intent = getIntent();
-        GameMaster gameMaster = (GameMaster) intent.getSerializableExtra("gameMaster");
+        gameMaster = (GameMaster) intent.getSerializableExtra("gameMaster");
         playerName.setText(gameMaster.getPlayer().getName()+ ": " + gameMaster.getPlayer().getHandValue().toString());
         computerName.setText("Computer: " + gameMaster.getComputer().computerHandValue().toString());
         playerImageAdaptor = new ImageAdapter(this, gameMaster.getPlayer().getHand());
@@ -43,11 +55,20 @@ public class ResultActivity extends AppCompatActivity {
         computerImageAdaptor = new ImageAdapter(this, gameMaster.getComputer().getHand());
         gridViewComputer.setAdapter(computerImageAdaptor);
         gameState.setText(gameMaster.getGameStatus());
+        playerScore = findViewById(R.id.player_score);
+        playerScore.setTypeface(typeface);
+        computerScore = findViewById(R.id.computer_score);
+        computerScore.setTypeface(typeface);
+        playerScore.setText("Player \nscore: " + gameMaster.getScore().getPlayerScore().toString());
+        computerScore.setText("Computer score: " + gameMaster.getScore().getComputerScore().toString());
 
     }
 
     public void onPlayAgainButtonClicked(View button){
-        Intent intent = new Intent(this, WelcomeActivity.class);
+        gameMaster.getPlayer().getHand().clearHand();
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("player", gameMaster.getPlayer());
+        intent.putExtra("score", gameMaster.getScore());
         startActivity(intent);
     }
 }
