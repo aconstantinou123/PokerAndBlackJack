@@ -60,4 +60,10 @@ public class Card implements Serializable {
     public String hideCard() {
         return "Secret";
     }
+
+    public int getPokerValue(){
+        return cardValue.getPokerValue();
+    }
+
+
 }
