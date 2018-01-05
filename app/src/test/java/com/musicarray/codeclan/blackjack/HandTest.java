@@ -146,6 +146,7 @@ public class HandTest {
         hand.addCards(card6);
         hand.addCards(card7);
         assertEquals(8, hand.checkHand());
+//        assertEquals(13, hand.getHighestPokerCard());
 
     }
 
@@ -156,6 +157,7 @@ public class HandTest {
         hand.addCards(card6);
         hand.addCards(card7);
         assertEquals(7, hand.checkHand());
+//        assertEquals(13, hand.getHighestPokerCard());
 
     }
 
@@ -166,20 +168,27 @@ public class HandTest {
         hand.addCards(card6);
         hand.addCards(card7);
         assertEquals(4, hand.checkHand());
+//        assertEquals(13, hand.getHighestPokerCard());
 
     }
 
-    @Test public void canGetTwoPairs(){
+    @Test public void canGetTwoOfAKind(){
         hand.addCards(card6);
         hand.addCards(card7);
+        hand.addCards(card9);
+        hand.addCards(card10);
+        hand.addCards(card11);
+        assertEquals(2, hand.checkHand());
+//        assertEquals(13, hand.getHighestPokerCard());
     }
 
-    @Test public void canGetTwoOfAKind() {
+    @Test public void canGetTwoPairs() {
         hand.addCards(card3);
         hand.addCards(card4);
         hand.addCards(card6);
         hand.addCards(card7);
         assertEquals(3, hand.checkHand());
+//        assertEquals(13, hand.getHighestPokerCard());
 
     }
 
@@ -215,6 +224,7 @@ public class HandTest {
         hand.addCards(card10);
         assertEquals(true, hand.checkFlush());
         assertEquals(6, hand.checkHand());
+//        assertEquals(13, hand.getHighestPokerCard());
 
     }
 
@@ -237,6 +247,8 @@ public class HandTest {
         hand.addCards(card12);
         assertEquals(true, hand.checkStraight());
         assertEquals(9, hand.checkHand());
+        assertEquals("a Straight Flush", hand.getPokerWinMessage());
+        assertEquals(6, hand.getHighestPokerCard());
 
     }
 
@@ -248,6 +260,7 @@ public class HandTest {
         hand.addCards(card12);
         assertEquals(false, hand.checkStraight());
         assertEquals(1, hand.checkHand());
+        assertEquals("a High Card", hand.getPokerWinMessage());
 
     }
 
@@ -259,6 +272,7 @@ public class HandTest {
         hand.addCards(card17);
         assertEquals(true, hand.checkRoyalFlush());
         assertEquals(10, hand.checkHand());
+        assertEquals("a Royal Flush", hand.getPokerWinMessage());
     }
 
     @Test public void canCheckForRoyalFlush_False(){

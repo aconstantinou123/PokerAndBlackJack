@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".GameActivity" />
         <activity android:name=".ResultActivity" />
-        <activity android:name=".PlayerNameActivity"></activity>
+        <activity android:name=".PlayerNameActivity" />
+        <activity android:name=".GamePokerActivity" />
+        <activity android:name=".ResultPokerActivity"></activity>
     </application>
 
 </manifest>

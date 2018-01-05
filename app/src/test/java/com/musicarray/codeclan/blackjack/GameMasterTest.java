@@ -22,6 +22,21 @@ public class GameMasterTest {
     Card card4;
     Card card5;
     Card card6;
+    Card card7;
+    Card card8;
+    Card card9;
+    Card card10;
+    Card card11;
+    Card card12;
+    Card card13;
+    Card card14;
+    Card card15;
+    Card card16;
+    Card card17;
+    Card card18;
+    Card card19;
+    Card card20;
+    Card card21;
     Score score;
     GameMaster gameMaster;
 
@@ -38,6 +53,21 @@ public class GameMasterTest {
         card4 = new Card(CardValue.FIVE, SuitType.SPADES);
         card5 = new Card(CardValue.JACK, SuitType.SPADES);
         card6 = new Card(CardValue.ACE, SuitType.SPADES);
+        card7 = new Card(CardValue.ACE, SuitType.HEARTS);
+        card8 = new Card(CardValue.TWO, SuitType.DIAMONDS);
+        card9 = new Card(CardValue.THREE, SuitType.DIAMONDS);
+        card10 = new Card(CardValue.FOUR, SuitType.DIAMONDS);
+        card11 = new Card(CardValue.FIVE, SuitType.DIAMONDS);
+        card12 = new Card(CardValue.SIX, SuitType.DIAMONDS);
+        card13 = new Card(CardValue.TEN, SuitType.DIAMONDS);
+        card14 = new Card(CardValue.JACK, SuitType.DIAMONDS);
+        card15 = new Card(CardValue.QUEEN, SuitType.DIAMONDS);
+        card16 = new Card(CardValue.KING, SuitType.DIAMONDS);
+        card17 = new Card(CardValue.ACE, SuitType.DIAMONDS);
+        card18 = new Card(CardValue.SIX, SuitType.CLUBS);
+        card19 = new Card(CardValue.EIGHT, SuitType.HEARTS);
+        card20 = new Card(CardValue.NINE, SuitType.DIAMONDS);
+        card21 = new Card(CardValue.THREE, SuitType.HEARTS);
         score = new Score();
         gameMaster = new GameMaster(player, computer, score);
 
@@ -148,6 +178,87 @@ public class GameMasterTest {
         player.setHoldStatus(true);
         gameMaster.checkWinner();
         assertEquals("Its a draw! Both hands are equal", gameMaster.getGameStatus());
+    }
+
+    @Test
+    public void computerCanWinWithBetterHand(){
+        playerHand.addCards(card4);
+        playerHand.addCards(card5);
+        playerHand.addCards(card6);
+        playerHand.addCards(card7);
+        playerHand.addCards(card8);
+        computerHand.addCards(card8);
+        computerHand.addCards(card9);
+        computerHand.addCards(card10);
+        computerHand.addCards(card11);
+        computerHand.addCards(card12);
+        gameMaster.checkWinnerPoker();
+        assertEquals("Computer wins with a Straight Flush", gameMaster.getGameStatus());
+    }
+
+    @Test
+    public void playerCanWinWithBetterHand(){
+        computerHand.addCards(card4);
+        computerHand.addCards(card5);
+        computerHand.addCards(card6);
+        computerHand.addCards(card7);
+        computerHand.addCards(card8);
+        playerHand.addCards(card13);
+        playerHand.addCards(card14);
+        playerHand.addCards(card15);
+        playerHand.addCards(card16);
+        playerHand.addCards(card17);
+        gameMaster.checkWinnerPoker();
+        assertEquals("Player wins with a Royal Flush", gameMaster.getGameStatus());
+    }
+
+    @Test
+    public void computerCanWinWithHighestCard(){
+        playerHand.addCards(card1);
+        playerHand.addCards(card2);
+        playerHand.addCards(card3);
+        playerHand.addCards(card4);
+        playerHand.addCards(card5);
+        computerHand.addCards(card6);
+        computerHand.addCards(card7);
+        computerHand.addCards(card8);
+        computerHand.addCards(card9);
+        computerHand.addCards(card10);
+        gameMaster.checkWinnerPoker();
+        assertEquals("Computer wins with the highest card", gameMaster.getGameStatus());
+    }
+
+    @Test
+    public void playerCanWithWithHighestCard(){
+        computerHand.addCards(card16);
+        computerHand.addCards(card18);
+        computerHand.addCards(card19);
+        computerHand.addCards(card20);
+        computerHand.addCards(card21);
+        playerHand.addCards(card1);
+        playerHand.addCards(card3);
+        playerHand.addCards(card4);
+        playerHand.addCards(card5);
+        playerHand.addCards(card6);
+        gameMaster.checkWinnerPoker();
+        assertEquals("Player wins with the highest card", gameMaster.getGameStatus());
+    }
+
+    @Test
+    public void playerAndComputerCanDraw(){
+        playerHand.addCards(card1);
+        playerHand.addCards(card2);
+        playerHand.addCards(card3);
+        playerHand.addCards(card4);
+        playerHand.addCards(card5);
+        computerHand.addCards(card1);
+        computerHand.addCards(card2);
+        computerHand.addCards(card3);
+        computerHand.addCards(card4);
+        computerHand.addCards(card5);
+        gameMaster.checkWinnerPoker();
+        assertEquals("It's a draw", gameMaster.getGameStatus());
+
     }
 
 }

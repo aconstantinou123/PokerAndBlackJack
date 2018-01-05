@@ -7,6 +7,8 @@
     <string name="play_again_text">Play Again</string>
     <string name="welcome_text">Welcome to Black Jack!</string>
     <string name="player_name">Please enter your name</string>
-    <string name="continue_text">Continue</string>
+    <string name="continue_text">Play Black Jack</string>
     <string name="preference_file_key">PLAYER</string>
+    <string name="check_winner">Check Winner</string>
+    <string name="play_poker_text">Play Poker</string>
 </resources>

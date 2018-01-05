@@ -5,7 +5,7 @@ package com.musicarray.codeclan.blackjack;
  */
 
 public enum CardValue {
-    ACE (1, "Ace", 13),
+    ACE (1, "Ace", 14),
     TWO (2, "Two", 2),
     THREE(3, "Three", 3),
     FOUR(4, "Four", 4),
