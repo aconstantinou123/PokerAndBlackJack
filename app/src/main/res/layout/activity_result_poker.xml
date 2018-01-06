@@ -188,14 +188,15 @@
         app:layout_constraintVertical_bias="0.174" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="88dp"
+        android:id="@+id/poker_play_again"
+        android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/pokerchipbutton"
+        android:onClick="onPokerPlayAgainButtonClicked"
         android:text="@string/play_again_text"
         app:layout_constraintBottom_toTopOf="@+id/player_poker_name_result"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,7 @@
 package com.musicarray.codeclan.blackjack;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ public class GamePokerActivity extends AppCompatActivity {
 
     Button checkWinnerButton;
     TextView playerName;
+    TextView computerName;
     ImageView playerCard1;
     ImageView playerCard2;
     ImageView playerCard3;
@@ -30,6 +32,7 @@ public class GamePokerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_poker);
         checkWinnerButton = findViewById(R.id.check_winner);
         playerName = findViewById(R.id.player_poker_name);
+        computerName = findViewById(R.id.computer_poker_name);
         playerCard1 = findViewById(R.id.player_card_1);
         playerCard2 = findViewById(R.id.player_card_2);
         playerCard3 = findViewById(R.id.player_card_3);
@@ -44,6 +47,7 @@ public class GamePokerActivity extends AppCompatActivity {
         computer = new Computer(computerHand);
         score = new Score();
         gameMaster = new GameMaster(player, computer, score);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
         deck.deal(player.getHand());
         deck.deal(player.getHand());
         deck.deal(player.getHand());
@@ -55,6 +59,9 @@ public class GamePokerActivity extends AppCompatActivity {
         deck.deal(computer.getHand());
         deck.deal(computer.getHand());
         playerName.setText(player.getName());
+        playerName.setTypeface(typeface);
+        computerName.setTypeface(typeface);
+        checkWinnerButton.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
         playerCard3.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(2).getCardPicture(), "drawable", getPackageName()));

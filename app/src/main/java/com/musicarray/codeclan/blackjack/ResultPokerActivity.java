@@ -1,8 +1,11 @@
 package com.musicarray.codeclan.blackjack;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,12 +23,15 @@ public class ResultPokerActivity extends AppCompatActivity {
     ImageView playerCard5;
     TextView playerName;
     TextView pokerResult;
+    TextView computerName;
     GameMaster gameMaster;
+    Button playAgainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_poker);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
         computerCard1 = findViewById(R.id.computer_card_1);
         computerCard2 = findViewById(R.id.computer_card_2);
         computerCard3 = findViewById(R.id.computer_card_3);
@@ -37,7 +43,9 @@ public class ResultPokerActivity extends AppCompatActivity {
         playerCard4 = findViewById(R.id.player_card_4_result);
         playerCard5 = findViewById(R.id.player_card_5_result);
         playerName = findViewById(R.id.player_poker_name_result);
+        computerName = findViewById(R.id.computer_poker_name);
         pokerResult = findViewById(R.id.poker_result_screen);
+        playAgainButton = findViewById(R.id.poker_play_again);
         Intent intent = getIntent();
         gameMaster = (GameMaster) intent.getSerializableExtra("gameMaster");
         computerCard1.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
@@ -51,9 +59,16 @@ public class ResultPokerActivity extends AppCompatActivity {
         playerCard4.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(3).getCardPicture(), "drawable", getPackageName()));
         playerCard5.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(4).getCardPicture(), "drawable", getPackageName()));
         playerName.setText(gameMaster.getPlayer().getName());
+        playerName.setTypeface(typeface);
         pokerResult.setText(gameMaster.getGameStatus());
+        pokerResult.setTypeface(typeface);
+        computerName.setTypeface(typeface);
+    }
 
-
-
+    public void onPokerPlayAgainButtonClicked(View button){
+        gameMaster.getPlayer().getHand().clearHand();
+        Intent intent = new Intent(this, GamePokerActivity.class);
+        intent.putExtra("player", gameMaster.getPlayer());
+        startActivity(intent);
     }
 }
