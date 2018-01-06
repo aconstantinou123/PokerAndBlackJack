@@ -11,11 +11,17 @@ public class Player implements Serializable {
     private String name;
     private Hand hand;
     private boolean holdStatus;
+    private Wallet wallet;
 
     public Player(String name,Hand hand) {
         this.name = name;
         this.hand = hand;
         this.holdStatus = false;
+        this.wallet = new Wallet();
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 
     public boolean getHoldStatus() {

@@ -11,12 +11,18 @@ public class Computer implements Serializable {
     private Hand hand;
     private boolean holdStatus;
     private String computerStatus;
+    private Wallet bank;
 
     public Computer(Hand hand) {
             this.hand = hand;
             this.holdStatus = false;
             this.computerStatus = "";
+            this.bank = new Wallet();
         }
+
+    public Wallet getBank() {
+        return bank;
+    }
 
     public boolean getHoldStatus() {
         return holdStatus;

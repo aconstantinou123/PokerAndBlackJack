@@ -36,8 +36,15 @@ public class PlayerTest {
     }
 
     @Test
-    public void cangetPlayerHandValue(){
+    public void canGetPlayerHandValue(){
         deck.deal(hand);
         assertEquals(11, player.getHandValue(), 0.1);
     }
+
+    @Test
+    public void canGetWallet(){
+        assertEquals(0.0, player.getWallet().getMoney());
+    }
+
+
 }

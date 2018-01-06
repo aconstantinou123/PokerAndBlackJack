@@ -13,6 +13,7 @@ public class GameMaster implements Serializable {
     private String gameStatus;
     private boolean winState;
     private Score score;
+    private Wallet bettingPool;
 
     public GameMaster(Player player, Computer computer, Score score) {
         this.player = player;
@@ -20,6 +21,15 @@ public class GameMaster implements Serializable {
         this.gameStatus = "";
         this.winState = false;
         this.score = score;
+        this.bettingPool = new Wallet();
+    }
+
+    public Wallet getBettingPool() {
+        return bettingPool;
+    }
+
+    public void setBettingPool(Wallet bettingPool) {
+        this.bettingPool = bettingPool;
     }
 
     public boolean getWinState() {
