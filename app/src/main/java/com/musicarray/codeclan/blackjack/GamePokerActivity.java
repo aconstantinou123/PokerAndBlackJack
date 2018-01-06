@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class GamePokerActivity extends AppCompatActivity {
 
     Button checkWinnerButton;
@@ -25,11 +27,14 @@ public class GamePokerActivity extends AppCompatActivity {
     Computer computer;
     Score score;
     GameMaster gameMaster;
+    int currentCard;
+    ArrayList<ImageView> playerCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_poker);
+        currentCard = 2;
         checkWinnerButton = findViewById(R.id.check_winner);
         playerName = findViewById(R.id.player_poker_name);
         computerName = findViewById(R.id.computer_poker_name);
@@ -38,6 +43,12 @@ public class GamePokerActivity extends AppCompatActivity {
         playerCard3 = findViewById(R.id.player_card_3);
         playerCard4 = findViewById(R.id.player_card_4);
         playerCard5 = findViewById(R.id.player_card_5);
+        playerCards = new ArrayList<>();
+        playerCards.add(playerCard1);
+        playerCards.add(playerCard2);
+        playerCards.add(playerCard3);
+        playerCards.add(playerCard4);
+        playerCards.add(playerCard5);
         Intent intent = getIntent();
         player = (Player) intent.getSerializableExtra("player");
         deck = new Deck();
@@ -64,15 +75,21 @@ public class GamePokerActivity extends AppCompatActivity {
         checkWinnerButton.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
-        playerCard3.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(2).getCardPicture(), "drawable", getPackageName()));
-        playerCard4.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(3).getCardPicture(), "drawable", getPackageName()));
-        playerCard5.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(4).getCardPicture(), "drawable", getPackageName()));
+        playerCard3.setImageResource(R.drawable.playingcardback);
+        playerCard4.setImageResource(R.drawable.playingcardback);
+        playerCard5.setImageResource(R.drawable.playingcardback);
     }
 
     public void onCheckWinnerButtonClicked(View button){
-        gameMaster.checkWinnerPoker();
-        Intent intent2 = new Intent(this, ResultPokerActivity.class);
-        intent2.putExtra("gameMaster", gameMaster);
-        startActivity(intent2);
+        if (currentCard < 5){
+            playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(), "drawable", getPackageName()));
+            currentCard += 1;
+        }
+        else {
+            gameMaster.checkWinnerPoker();
+            Intent intent2 = new Intent(this,ResultPokerActivity.class);
+            intent2.putExtra("gameMaster",gameMaster);
+            startActivity(intent2);
+        }
     }
 }
