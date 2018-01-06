@@ -3,6 +3,7 @@ package com.musicarray.codeclan.blackjack;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,5 +60,12 @@ public class GamePokerActivity extends AppCompatActivity {
         playerCard3.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(2).getCardPicture(), "drawable", getPackageName()));
         playerCard4.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(3).getCardPicture(), "drawable", getPackageName()));
         playerCard5.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(4).getCardPicture(), "drawable", getPackageName()));
+    }
+
+    public void onCheckWinnerButtonClicked(View button){
+        gameMaster.checkWinnerPoker();
+        Intent intent2 = new Intent(this, ResultPokerActivity.class);
+        intent2.putExtra("gameMaster", gameMaster);
+        startActivity(intent2);
     }
 }
