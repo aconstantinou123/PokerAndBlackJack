@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -136,85 +137,143 @@ public class Hand implements Serializable {
                     cardValueCount.put(card.getCardValue(), 1);
                 }
             }
-            Map<CardValue, Integer> result = new HashMap<>(sortValues(cardValueCount));
-            Set<CardValue> keys = result.keySet();
-            ArrayList<Integer> highestCards = new ArrayList<>();
-                for (CardValue cardValue : keys){
-                    highestCards.add(cardValue.getPokerValue());
-                }
-            setHighestPokerCard(highestCards.get(0));
-            return sortValues(cardValueCount);
+
+            return cardValueCount;
     }
 
-    public HashMap<CardValue, Integer> sortValues(HashMap<CardValue, Integer> map){
-        Object[] a = map.entrySet().toArray();
-        Arrays.sort(a, new Comparator() {
-            public int compare(Object o1, Object o2) {
-                return ((Map.Entry<CardValue, Integer>) o2).getValue()
-                        .compareTo(((Map.Entry<CardValue, Integer>) o1).getValue());
+//    public int findHighestCard(){
+//        ArrayList<Integer> winningCards = new ArrayList<>();
+//        for (Card card : cardsHeld){
+//            if (card.isWinningCard() == true){
+//                winningCards.add(card.getPokerValue());
+//            }
+//        }
+//        Collections.sort(winningCards);
+//        Collections.reverse(winningCards);
+//        return  winningCards.get(0);
+
+//        Set<CardValue> keys = cardValueCount.keySet();
+//        ArrayList<Integer> highestCards = new ArrayList<>();
+//        for (CardValue cardValue : keys){
+//            highestCards.add(cardValue.getPokerValue());
+//        }
+//        Collections.sort(highestCards);
+//        Collections.reverse(highestCards);
+//        return  highestCards.get(0);
+//    }
+
+//    public HashMap<CardValue, Integer> sortValues(HashMap<CardValue, Integer> map){
+//        Object[] a = map.entrySet().toArray();
+//        Arrays.sort(a, new Comparator() {
+//            public int compare(Object o1, Object o2) {
+//                return ((Map.Entry<CardValue, Integer>) o2).getValue()
+//                        .compareTo(((Map.Entry<CardValue, Integer>) o1).getValue());
+//            }
+//        });
+//        HashMap<CardValue, Integer> resultHash = new HashMap<>();
+//        for (Object e : a) {
+//            resultHash.put(((Map.Entry<CardValue, Integer>) e).getKey(),((Map.Entry<CardValue, Integer>) e).getValue());
+//        }
+//        return resultHash;
+//    }
+
+    public int highCard(HashMap<CardValue, Integer> cardstoCheck, int cardCount){
+        ArrayList<Integer> resultArray = new ArrayList<>();
+        for (Map.Entry<CardValue, Integer> cardValueIntegerEntry : cardstoCheck.entrySet()){
+            if (cardValueIntegerEntry.getValue() == cardCount){
+                resultArray.add(cardValueIntegerEntry.getKey().getPokerValue());
             }
-        });
-        HashMap<CardValue, Integer> resultHash = new HashMap<>();
-        for (Object e : a) {
-            resultHash.put(((Map.Entry<CardValue, Integer>) e).getKey(),((Map.Entry<CardValue, Integer>) e).getValue());
         }
-        return resultHash;
+        Collections.sort(resultArray);
+        Collections.reverse(resultArray);
+        return resultArray.get(0);
     }
-
-
 
     public int checkHand() {
         int result = 1;
-        HashMap<CardValue, Integer> cardValueCount = new HashMap<>(checkDuplicateCardValues());
+        int highestCard;
         ArrayList<Integer> numberOfTwos = new ArrayList<>();
-        ArrayList<Integer> checkPairs = new ArrayList<>(cardValueCount.values());
+        HashMap<CardValue, Integer> checkPairs = checkDuplicateCardValues();
+        ArrayList<Integer> cardCountArray = new ArrayList<>();
+        cardCountArray.addAll(checkPairs.values());
+        Collections.sort(cardCountArray);
+        Collections.reverse(cardCountArray);
         setPokerWinMessage("a High Card");
             if (checkRoyalFlush() == true){
                 setPokerWinMessage("a Royal Flush");
+                highestCard = highCard(checkPairs, 1);
+                setHighestPokerCard(highestCard);
                 result = 10;
             }
             else if (checkFlush() == true && checkStraight() == true){
                 setPokerWinMessage("a Straight Flush");
+                highestCard = highCard(checkPairs, 1);
+                setHighestPokerCard(highestCard);
                 result = 9;
             }
-             else if (checkPairs.contains(4)) {
+             else if (cardCountArray.contains(4)) {
                 setPokerWinMessage("Four of a Kind");
+                highestCard = highCard(checkPairs, 4);
+                setHighestPokerCard(highestCard);
                 result = 8;
             }
-            else if (checkPairs.contains(3) && checkPairs.contains(2)) {
+            else if (cardCountArray.contains(3) && cardCountArray.contains(2)) {
                 setPokerWinMessage("a Full House");
+                highestCard = highCard(checkPairs, 3);
+                setHighestPokerCard(highestCard);
                 result = 7;
             }
             else if (checkFlush() == true) {
                 setPokerWinMessage("a Flush");
+                highestCard = highCard(checkPairs, 1);
+                setHighestPokerCard(highestCard);
                 result = 6;
             }
             else if(checkStraight() == true){
                 setPokerWinMessage("a Straight");
+                highestCard = highCard(checkPairs, 1);
+                setHighestPokerCard(highestCard);
                 result = 5;
             }
-            else if (checkPairs.contains(3)) {
+            else if (cardCountArray.contains(3)) {
                 setPokerWinMessage("Three of a Kind");
+                highestCard = highCard(checkPairs,3);
+                setHighestPokerCard(highestCard);
                 result = 4;
             }
-            else if (checkPairs.contains(2)) {
-                for(Integer cardValue : checkPairs){
+
+            else if (cardCountArray.contains(2)) {
+                for(Integer cardValue : cardCountArray){
                     if (cardValue == 2){
                         numberOfTwos.add(cardValue);
                     }
 
                 }
-                if (numberOfTwos.size() == 2){
-                    setPokerWinMessage("Two Pairs");
-                    result = 3;
-                }
-                else {
-                    result = 2;
-                setPokerWinMessage("One Pair");
-                }
+                    if (numberOfTwos.size() == 2){
+                        setPokerWinMessage("Two Pairs");
+                        highestCard = highCard(checkPairs,2);
+                        setHighestPokerCard(highestCard);
+                        result = 3;
+                    }
+                    else if (numberOfTwos.size() == 1){
+                        highestCard = highCard(checkPairs,2);
+                        setHighestPokerCard(highestCard);
+                        result = 2;
+                    setPokerWinMessage("One Pair");
+                    }
+                    else {
+                        highestCard = highCard(checkPairs,1);
+                        setHighestPokerCard(highestCard);
+                        result = 1;
+                    }
 
             }
-           return result;
+            else {
+                highestCard = highCard(checkPairs,1);
+                setHighestPokerCard(highestCard);
+            }
+        return result;
+
     }
 
     public boolean checkFlush(){
@@ -227,7 +286,6 @@ public class Hand implements Serializable {
                 checkHighestCard.add(card.getPokerValue());
             }
             Collections.sort(checkHighestCard);
-            setHighestPokerCard(checkHighestCard.get(checkHighestCard.size() -1));
         }
         if (resultArray.size() == 5){
             return true;
@@ -241,8 +299,8 @@ public class Hand implements Serializable {
             cardValues.add(card.getPokerValue());
         }
         Collections.sort(cardValues);
-        setHighestPokerCard(cardValues.get(cardValues.size() -1));
         ArrayList<Integer> resultArray = new ArrayList<>();
+        int cardToReturn = cardValues.get(0);
         int firstCardValue = cardValues.remove(0);
         for (int cardValue : cardValues){
             if(cardValue == firstCardValue + 1){
@@ -250,8 +308,10 @@ public class Hand implements Serializable {
                 resultArray.add(cardValue);
             }
         }
-        if (resultArray.size() == 4){
+        resultArray.add(cardToReturn);
+        if (resultArray.size() == 5){
             return true;
+
         }
         return false;
     }

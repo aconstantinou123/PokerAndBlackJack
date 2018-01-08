@@ -32,7 +32,6 @@ public class Card implements Serializable {
         return fileName;
     }
 
-
     public void setCardPicture() {
         this.cardPicture = getImage();
     }

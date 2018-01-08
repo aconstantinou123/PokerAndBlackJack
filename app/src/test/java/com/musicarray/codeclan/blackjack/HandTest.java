@@ -3,6 +3,7 @@ package com.musicarray.codeclan.blackjack;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static junit.framework.Assert.assertEquals;
@@ -32,6 +33,7 @@ public class HandTest {
     Card card15;
     Card card16;
     Card card17;
+    Card card18;
 
     @Before
     public void before(){
@@ -55,7 +57,8 @@ public class HandTest {
         card15 = new Card(CardValue.QUEEN, SuitType.DIAMONDS);
         card16 = new Card(CardValue.KING, SuitType.DIAMONDS);
         card17 = new Card(CardValue.ACE, SuitType.DIAMONDS);
-
+        card18 = new Card(CardValue.TWO, SuitType.DIAMONDS);
+        hand.setHighestPokerCard(0);
 
     }
 
@@ -133,9 +136,9 @@ public class HandTest {
         hand.addCards(card4);
         hand.addCards(card5);
         HashMap<CardValue, Integer> result = new HashMap<>();
+        result.put(CardValue.QUEEN, 2);
         result.put(CardValue.JACK, 1);
         result.put(CardValue.ACE, 2);
-        result.put(CardValue.QUEEN, 2);
         assertEquals(result, hand.checkDuplicateCardValues());
     }
 
@@ -146,7 +149,7 @@ public class HandTest {
         hand.addCards(card6);
         hand.addCards(card7);
         assertEquals(8, hand.checkHand());
-//        assertEquals(13, hand.getHighestPokerCard());
+        assertEquals(14, hand.getHighestPokerCard());
 
     }
 
@@ -157,7 +160,7 @@ public class HandTest {
         hand.addCards(card6);
         hand.addCards(card7);
         assertEquals(7, hand.checkHand());
-//        assertEquals(13, hand.getHighestPokerCard());
+        assertEquals(14, hand.getHighestPokerCard());
 
     }
 
@@ -168,7 +171,7 @@ public class HandTest {
         hand.addCards(card6);
         hand.addCards(card7);
         assertEquals(4, hand.checkHand());
-//        assertEquals(13, hand.getHighestPokerCard());
+        assertEquals(14, hand.getHighestPokerCard());
 
     }
 
@@ -179,7 +182,7 @@ public class HandTest {
         hand.addCards(card10);
         hand.addCards(card11);
         assertEquals(2, hand.checkHand());
-//        assertEquals(13, hand.getHighestPokerCard());
+        assertEquals(14, hand.getHighestPokerCard());
     }
 
     @Test public void canGetTwoPairs() {
@@ -187,8 +190,9 @@ public class HandTest {
         hand.addCards(card4);
         hand.addCards(card6);
         hand.addCards(card7);
+        hand.setHighestPokerCard(0);
         assertEquals(3, hand.checkHand());
-//        assertEquals(13, hand.getHighestPokerCard());
+        assertEquals(14, hand.getHighestPokerCard());
 
     }
 
@@ -199,8 +203,8 @@ public class HandTest {
         hand.addCards(card6);
         hand.addCards(card7);
         HashMap<CardValue, Integer> result = new HashMap<>();
-        result.put(CardValue.ACE, 4);
         result.put(CardValue.JACK, 1);
+        result.put(CardValue.ACE, 4);
         assertEquals(result, hand.checkDuplicateCardValues());
     }
 
@@ -210,10 +214,10 @@ public class HandTest {
         hand.addCards(card5);
         hand.addCards(card6);
         hand.addCards(card7);
-        HashMap<CardValue, Integer> result = new HashMap<>();
-        result.put(CardValue.ACE, 3);
-        result.put(CardValue.QUEEN, 2);
-        assertEquals(result, hand.checkDuplicateCardValues());
+       HashMap<CardValue, Integer> result = new HashMap<>();
+       result.put(CardValue.QUEEN, 2);
+       result.put(CardValue.ACE, 3);
+       assertEquals(result, hand.checkDuplicateCardValues());
     }
 
     @Test public void checkFlush_True(){
@@ -224,7 +228,7 @@ public class HandTest {
         hand.addCards(card10);
         assertEquals(true, hand.checkFlush());
         assertEquals(6, hand.checkHand());
-//        assertEquals(13, hand.getHighestPokerCard());
+        assertEquals(14, hand.getHighestPokerCard());
 
     }
 
@@ -283,6 +287,30 @@ public class HandTest {
         hand.addCards(card17);
         assertEquals(false, hand.checkRoyalFlush());
         assertEquals(2, hand.checkHand());
+    }
+
+    @Test public void canGetHighestCardComparingTwoPairs(){
+        hand.addCards(card3);
+        hand.addCards(card4);
+        hand.addCards(card5);
+        hand.addCards(card6);
+        hand.addCards(card7);
+        hand.checkDuplicateCardValues();
+        assertEquals(0, hand.getHighestPokerCard());
+    }
+
+    @Test public void highCardCheck(){
+        hand.addCards(card);
+        hand.addCards(card2);
+        hand.addCards(card3);
+        hand.addCards(card8);
+        hand.addCards(card18);
+        HashMap<CardValue, Integer> result = new HashMap<>();
+        result.put(CardValue.TWO, 1);
+        result.put(CardValue.JACK, 3);
+        result.put(CardValue.ACE, 2);
+        result.put(CardValue.KING, 1);
+        assertEquals(11, hand.highCard(result, 3));
     }
 
 

@@ -37,6 +37,26 @@ public class GameMasterTest {
     Card card19;
     Card card20;
     Card card21;
+    Card card22;
+    Card card23;
+    Card card24;
+    Card card25;
+    Card card26;
+    Card card27;
+    Card card28;
+    Card card29;
+    Card card30;
+    Card card31;
+    Card card32;
+    Card card33;
+    Card card34;
+    Card card35;
+    Card card36;
+    Card card37;
+    Card card38;
+    Card card39;
+    Card card40;
+    Card card41;
     Score score;
     GameMaster gameMaster;
 
@@ -68,6 +88,26 @@ public class GameMasterTest {
         card19 = new Card(CardValue.EIGHT, SuitType.HEARTS);
         card20 = new Card(CardValue.NINE, SuitType.DIAMONDS);
         card21 = new Card(CardValue.THREE, SuitType.HEARTS);
+        card22 = new Card(CardValue.KING, SuitType.DIAMONDS);
+        card23 = new Card(CardValue.KING, SuitType.HEARTS);
+        card24 = new Card(CardValue.FIVE, SuitType.SPADES);
+        card25 = new Card(CardValue.QUEEN, SuitType.HEARTS);
+        card26 = new Card(CardValue.EIGHT, SuitType.SPADES);
+        card27 = new Card(CardValue.FOUR, SuitType.HEARTS);
+        card28 = new Card(CardValue.TWO, SuitType.CLUBS);
+        card29 = new Card(CardValue.FOUR, SuitType.DIAMONDS);
+        card30 = new Card(CardValue.ACE, SuitType.DIAMONDS);
+        card31 = new Card(CardValue.QUEEN, SuitType.DIAMONDS);
+        card32 = new Card(CardValue.TEN, SuitType.HEARTS);
+        card33 = new Card(CardValue.QUEEN, SuitType.CLUBS);
+        card34 = new Card(CardValue.FOUR, SuitType.CLUBS);
+        card35 = new Card(CardValue.THREE, SuitType.DIAMONDS);
+        card36 = new Card(CardValue.FOUR, SuitType.HEARTS);
+        card37 = new Card(CardValue.NINE, SuitType.CLUBS);
+        card38 = new Card(CardValue.SIX, SuitType.HEARTS);
+        card39 = new Card(CardValue.TWO, SuitType.DIAMONDS);
+        card40 = new Card(CardValue.FIVE, SuitType.HEARTS);
+        card41 = new Card(CardValue.SIX, SuitType.CLUBS);
         score = new Score();
         gameMaster = new GameMaster(player, computer, score);
 
@@ -242,6 +282,8 @@ public class GameMasterTest {
         playerHand.addCards(card6);
         gameMaster.checkWinnerPoker();
         assertEquals("Player wins with the highest card", gameMaster.getGameStatus());
+        assertEquals(13, computerHand.getHighestPokerCard());
+        assertEquals(14, playerHand.getHighestPokerCard());
     }
 
     @Test
@@ -261,4 +303,36 @@ public class GameMasterTest {
 
     }
 
+    @Test
+    public void errorTest(){
+        computerHand.addCards(card22);
+        computerHand.addCards(card23);
+        computerHand.addCards(card24);
+        computerHand.addCards(card25);
+        computerHand.addCards(card26);
+        playerHand.addCards(card27);
+        playerHand.addCards(card28);
+        playerHand.addCards(card29);
+        playerHand.addCards(card30);
+        playerHand.addCards(card31);
+        gameMaster.checkWinnerPoker();
+        assertEquals("Computer wins with the highest card", gameMaster.getGameStatus());
+
+    }
+
+    @Test
+    public void errorTest2(){
+        computerHand.addCards(card32);
+        computerHand.addCards(card33);
+        computerHand.addCards(card34);
+        computerHand.addCards(card35);
+        computerHand.addCards(card36);
+        playerHand.addCards(card37);
+        playerHand.addCards(card38);
+        playerHand.addCards(card39);
+        playerHand.addCards(card40);
+        playerHand.addCards(card41);
+        gameMaster.checkWinnerPoker();
+        assertEquals("Player wins with the highest card", gameMaster.getGameStatus());
+    }
 }
