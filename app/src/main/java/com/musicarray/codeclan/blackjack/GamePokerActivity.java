@@ -115,6 +115,18 @@ public class GamePokerActivity extends AppCompatActivity {
         }
         else {
             gameMaster.checkWinnerPoker();
+            double winnings = gameMaster.getBettingPool().getMoney();
+                if(player.isWinner() == true){
+                   player.getWallet().addMoney(winnings);
+                }
+                else if (computer.isWinner() == true){
+                    computer.getBank().addMoney(winnings);
+                }
+                else {
+                    player.getWallet().addMoney(winnings / 2);
+                    computer.getBank().addMoney(winnings / 2);
+                }
+            gameMaster.getBettingPool().clearMoney();
             Intent intent2 = new Intent(this,ResultPokerActivity.class);
             intent2.putExtra("gameMaster",gameMaster);
             startActivity(intent2);

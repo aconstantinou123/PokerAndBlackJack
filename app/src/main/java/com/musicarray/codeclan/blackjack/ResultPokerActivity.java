@@ -68,6 +68,8 @@ public class ResultPokerActivity extends AppCompatActivity {
     public void onPokerPlayAgainButtonClicked(View button){
         gameMaster.getPlayer().getHand().clearHand();
         gameMaster.getPlayer().getHand().setHighestPokerCard(0);
+        gameMaster.getPlayer().setWinner(false);
+        gameMaster.getComputer().setWinner(false);
         Intent intent = new Intent(this, GamePokerActivity.class);
         intent.putExtra("player", gameMaster.getPlayer());
         startActivity(intent);

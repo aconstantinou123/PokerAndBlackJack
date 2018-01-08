@@ -34,6 +34,10 @@ public class Player implements Serializable {
         return wallet;
     }
 
+    public void setWallet(Wallet wallet){
+        this.wallet = wallet;
+    }
+
     public boolean getHoldStatus() {
         return holdStatus;
     }

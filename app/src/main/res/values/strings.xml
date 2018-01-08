@@ -12,4 +12,5 @@
     <string name="check_winner">Check Winner</string>
     <string name="play_poker_text">Play Poker</string>
     <string name="fold_text">Fold</string>
+    <string name="bet_text">Bet</string>
 </resources>
