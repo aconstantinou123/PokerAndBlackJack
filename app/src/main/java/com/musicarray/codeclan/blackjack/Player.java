@@ -12,12 +12,22 @@ public class Player implements Serializable {
     private Hand hand;
     private boolean holdStatus;
     private Wallet wallet;
+    private boolean winner;
 
     public Player(String name,Hand hand) {
         this.name = name;
         this.hand = hand;
         this.holdStatus = false;
         this.wallet = new Wallet();
+        this.winner = false;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
     }
 
     public Wallet getWallet() {

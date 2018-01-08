@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +16,11 @@ public class GamePokerActivity extends AppCompatActivity {
 
     Button checkWinnerButton;
     Button foldButton;
+    EditText moneyToBet;
     TextView playerName;
     TextView computerName;
+    TextView playerWallet;
+    TextView bettingPot;
     ImageView playerCard1;
     ImageView playerCard2;
     ImageView playerCard3;
@@ -40,6 +44,9 @@ public class GamePokerActivity extends AppCompatActivity {
         foldButton = findViewById(R.id.fold_button);
         playerName = findViewById(R.id.player_poker_name);
         computerName = findViewById(R.id.computer_poker_name);
+        moneyToBet = findViewById(R.id.money_to_bet);
+        bettingPot = findViewById(R.id.betting_pot);
+        playerWallet = findViewById(R.id.player_wallet);
         playerCard1 = findViewById(R.id.player_card_1);
         playerCard2 = findViewById(R.id.player_card_2);
         playerCard3 = findViewById(R.id.player_card_3);
@@ -58,6 +65,7 @@ public class GamePokerActivity extends AppCompatActivity {
         deck.shuffle();
         computerHand = new Hand();
         computer = new Computer(computerHand);
+        computer.getBank().setMoney(10000);
         score = new Score();
         gameMaster = new GameMaster(player, computer, score);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
@@ -76,6 +84,11 @@ public class GamePokerActivity extends AppCompatActivity {
         computerName.setTypeface(typeface);
         checkWinnerButton.setTypeface(typeface);
         foldButton.setTypeface(typeface);
+        moneyToBet.setTypeface(typeface);
+        bettingPot.setText("Betting Pot: £" + gameMaster.getBettingPool().getMoney());
+        bettingPot.setTypeface(typeface);
+        playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
+        playerWallet.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
         playerCard3.setImageResource(R.drawable.playingcardback);
@@ -85,8 +98,20 @@ public class GamePokerActivity extends AppCompatActivity {
 
     public void onCheckWinnerButtonClicked(View button){
         if (currentCard < 5){
-            playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(), "drawable", getPackageName()));
-            currentCard += 1;
+            try {
+                String betString = moneyToBet.getText().toString();
+                Double bet = Double.parseDouble(betString);
+                player.getWallet().removeMoney(bet);
+                computer.getBank().removeMoney(bet);
+                gameMaster.getBettingPool().addMoney(bet * 2);
+                playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(),"drawable",getPackageName()));
+                currentCard += 1;
+                playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
+                bettingPot.setText("Betting Pot: £" + gameMaster.getBettingPool().getMoney());
+            }
+            catch (NumberFormatException e){
+                playerWallet.setText("Invalid Amount");
+            }
         }
         else {
             gameMaster.checkWinnerPoker();

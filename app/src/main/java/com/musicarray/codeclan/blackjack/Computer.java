@@ -12,13 +12,23 @@ public class Computer implements Serializable {
     private boolean holdStatus;
     private String computerStatus;
     private Wallet bank;
+    private boolean winner;
 
     public Computer(Hand hand) {
             this.hand = hand;
             this.holdStatus = false;
             this.computerStatus = "";
             this.bank = new Wallet();
+            this.winner = false;
         }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
+    }
 
     public Wallet getBank() {
         return bank;

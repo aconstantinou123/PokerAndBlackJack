@@ -135,22 +135,28 @@ public class GameMaster implements Serializable {
         if (player.getHand().checkHand() == computer.getHand().checkHand()) {
             if (computer.getHand().getHighestPokerCard() > player.getHand().getHighestPokerCard()) {
                 setGameStatus("Computer wins with the highest card");
+                computer.setWinner(true);
                 setWinState(true);
             } else if (player.getHand().getHighestPokerCard() > computer.getHand().getHighestPokerCard()) {
                 setGameStatus("Player wins with the highest card");
                 setWinState(true);
+                player.setWinner(true);
             } else {
                 setGameStatus("It's a draw");
                 setWinState(true);
+                computer.setWinner(true);
+                player.setWinner(true);
             }
         }
         else if (computer.getHand().checkHand() > player.getHand().checkHand()){
             setGameStatus("Computer wins with " + computer.getHand().getPokerWinMessage());
             setWinState(true);
+            computer.setWinner(true);
         }
         else if (player.getHand().checkHand() > computer.getHand().checkHand()){
             setGameStatus("Player wins with " + player.getHand().getPokerWinMessage());
             setWinState(true);
+            player.setWinner(true);
         }
 
     }

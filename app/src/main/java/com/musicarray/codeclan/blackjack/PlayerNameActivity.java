@@ -47,6 +47,7 @@ public class PlayerNameActivity extends AppCompatActivity {
         String newPlayerName = playerName.getText().toString();
         hand = new Hand();
         player = new Player(newPlayerName, hand);
+        player.getWallet().setMoney(200);
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("player", player);
         startActivity(intent);
@@ -60,6 +61,7 @@ public class PlayerNameActivity extends AppCompatActivity {
         String newPlayerName = playerName.getText().toString();
         hand = new Hand();
         player = new Player(newPlayerName, hand);
+        player.getWallet().setMoney(200);
         Intent intent = new Intent(this, GamePokerActivity.class);
         intent.putExtra("player", player);
         startActivity(intent);
