@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,13 +102,11 @@
         android:id="@+id/check_winner"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/pokerchipbutton"
         android:onClick="onCheckWinnerButtonClicked"
         android:text="@string/check_winner"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/computer_card_3" />
 
@@ -177,4 +175,36 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/player_card_4"
         app:layout_constraintTop_toBottomOf="@+id/player_poker_name" />
+
+    <Button
+        android:id="@+id/fold_button"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/pokerchipbutton"
+        android:onClick="onFoldButtonClicked"
+        android:text="@string/fold_text"
+        app:layout_constraintBottom_toTopOf="@+id/player_poker_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/computer_card_3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/money_to_bet"
+        android:layout_width="102dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="£"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/player_poker_name"
+        app:layout_constraintEnd_toStartOf="@+id/fold_button"
+        app:layout_constraintStart_toEndOf="@+id/check_winner"
+        app:layout_constraintTop_toBottomOf="@+id/computer_card_3"
+        app:layout_constraintVertical_bias="0.572" />
 </android.support.constraint.ConstraintLayout>

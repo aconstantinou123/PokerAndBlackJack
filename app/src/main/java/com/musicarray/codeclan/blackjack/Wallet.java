@@ -29,4 +29,8 @@ public class Wallet implements Serializable {
     public void removeMoney(double money) {
         this.money -= money;
     }
+
+    public void clearMoney(){
+        this.money = 0;
+    }
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class GamePokerActivity extends AppCompatActivity {
 
     Button checkWinnerButton;
+    Button foldButton;
     TextView playerName;
     TextView computerName;
     ImageView playerCard1;
@@ -36,6 +37,7 @@ public class GamePokerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_poker);
         currentCard = 2;
         checkWinnerButton = findViewById(R.id.check_winner);
+        foldButton = findViewById(R.id.fold_button);
         playerName = findViewById(R.id.player_poker_name);
         computerName = findViewById(R.id.computer_poker_name);
         playerCard1 = findViewById(R.id.player_card_1);
@@ -73,6 +75,7 @@ public class GamePokerActivity extends AppCompatActivity {
         playerName.setTypeface(typeface);
         computerName.setTypeface(typeface);
         checkWinnerButton.setTypeface(typeface);
+        foldButton.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
         playerCard3.setImageResource(R.drawable.playingcardback);
@@ -91,5 +94,16 @@ public class GamePokerActivity extends AppCompatActivity {
             intent2.putExtra("gameMaster",gameMaster);
             startActivity(intent2);
         }
+    }
+
+    public void onFoldButtonClicked(View button){
+        gameMaster.setGameStatus("Player Folds. Computer wins £" + gameMaster.getBettingPool().getMoney() + "0");
+        double winnings =  gameMaster.getBettingPool().getMoney();
+        computer.getBank().addMoney(winnings);
+        gameMaster.getBettingPool().clearMoney();
+        Intent intent2 = new Intent(this, ResultPokerActivity.class);
+        intent2.putExtra("gameMaster", gameMaster);
+        startActivity(intent2);
+
     }
 }
