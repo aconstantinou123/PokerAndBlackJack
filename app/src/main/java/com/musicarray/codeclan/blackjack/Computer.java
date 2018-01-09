@@ -2,6 +2,10 @@ package com.musicarray.codeclan.blackjack;
 
 import java.io.Serializable;
 import java.util.Random;
+<<<<<<< HEAD
+=======
+import java.util.concurrent.ThreadLocalRandom;
+>>>>>>> f5268b6e5661fa99dbd167c10bcd4380938d5981
 
 /**
  * Created by user on 12/28/17.
@@ -91,5 +95,8 @@ public class Computer implements Serializable {
         }
         return 5*(Math.round(computerBet/5));
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f5268b6e5661fa99dbd167c10bcd4380938d5981
 }
