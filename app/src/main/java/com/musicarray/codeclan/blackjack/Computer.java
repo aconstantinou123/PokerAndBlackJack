@@ -1,6 +1,7 @@
 package com.musicarray.codeclan.blackjack;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Created by user on 12/28/17.
@@ -72,4 +73,23 @@ public class Computer implements Serializable {
             setComputerStatus("Computer holds");
         }
     }
+
+    public double computerBet(double bet) {
+        double computerBet;
+        double min = 0.75;
+        double max = 1.5;
+        Random r = new Random();
+        double randomBet = min + (max - min) * r.nextDouble();
+        if (this.hand.checkHand() > 7) {
+            computerBet = (bet * 5) * randomBet;
+        } else if (this.hand.checkHand() > 3) {
+            computerBet = (bet * 3) * randomBet;
+        } else if (this.hand.checkHand() > 1) {
+            computerBet = (bet * 2) / randomBet;
+        } else {
+            computerBet = bet * randomBet;
+        }
+        return 5*(Math.round(computerBet/5));
+    }
+
 }

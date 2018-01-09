@@ -78,9 +78,6 @@ public class GamePokerActivity extends AppCompatActivity {
         deck.deal(player.getHand());
         deck.deal(computer.getHand());
         deck.deal(computer.getHand());
-        deck.deal(computer.getHand());
-        deck.deal(computer.getHand());
-        deck.deal(computer.getHand());
         playerName.setText(player.getName());
         playerName.setTypeface(typeface);
         computerName.setTypeface(typeface);
@@ -107,8 +104,11 @@ public class GamePokerActivity extends AppCompatActivity {
                 Double bet = Double.parseDouble(betString);
                 if (player.getWallet().checkValidBet(bet) == true) {
                     player.getWallet().removeMoney(bet);
-                    computer.getBank().removeMoney(bet);
-                    gameMaster.getBettingPool().addMoney(bet * 2);
+                    double computerBet = computer.computerBet(bet);
+                    computer.getBank().removeMoney(computerBet);
+                    gameMaster.getBettingPool().addMoney(bet);
+                    gameMaster.getBettingPool().addMoney(computerBet);
+                    deck.deal(computer.getHand());
                     playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(),"drawable",getPackageName()));
                     currentCard += 1;
                     playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
