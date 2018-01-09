@@ -17,6 +17,7 @@ public class GamePokerActivity extends AppCompatActivity {
     Button checkWinnerButton;
     Button foldButton;
     EditText moneyToBet;
+    TextView warningMessage;
     TextView playerName;
     TextView computerName;
     TextView playerWallet;
@@ -46,6 +47,7 @@ public class GamePokerActivity extends AppCompatActivity {
         computerName = findViewById(R.id.computer_poker_name);
         moneyToBet = findViewById(R.id.money_to_bet);
         bettingPot = findViewById(R.id.betting_pot);
+        warningMessage = findViewById(R.id.warning_message);
         playerWallet = findViewById(R.id.player_wallet);
         playerCard1 = findViewById(R.id.player_card_1);
         playerCard2 = findViewById(R.id.player_card_2);
@@ -89,6 +91,7 @@ public class GamePokerActivity extends AppCompatActivity {
         bettingPot.setTypeface(typeface);
         playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
         playerWallet.setTypeface(typeface);
+        warningMessage.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
         playerCard3.setImageResource(R.drawable.playingcardback);
@@ -98,16 +101,22 @@ public class GamePokerActivity extends AppCompatActivity {
 
     public void onCheckWinnerButtonClicked(View button){
         if (currentCard < 5){
+            warningMessage.setText("");
             try {
                 String betString = moneyToBet.getText().toString();
                 Double bet = Double.parseDouble(betString);
-                player.getWallet().removeMoney(bet);
-                computer.getBank().removeMoney(bet);
-                gameMaster.getBettingPool().addMoney(bet * 2);
-                playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(),"drawable",getPackageName()));
-                currentCard += 1;
-                playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
-                bettingPot.setText("Betting Pot: £" + gameMaster.getBettingPool().getMoney());
+                if (player.getWallet().checkValidBet(bet) == true) {
+                    player.getWallet().removeMoney(bet);
+                    computer.getBank().removeMoney(bet);
+                    gameMaster.getBettingPool().addMoney(bet * 2);
+                    playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(),"drawable",getPackageName()));
+                    currentCard += 1;
+                    playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
+                    bettingPot.setText("Betting Pot: £" + gameMaster.getBettingPool().getMoney());
+                }
+                else {
+                   warningMessage.setText(R.string.warning_message);
+                }
             }
             catch (NumberFormatException e){
                 playerWallet.setText("Invalid Amount");

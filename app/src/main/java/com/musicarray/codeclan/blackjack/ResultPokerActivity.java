@@ -46,8 +46,12 @@ public class ResultPokerActivity extends AppCompatActivity {
         computerName = findViewById(R.id.computer_poker_name);
         pokerResult = findViewById(R.id.poker_result_screen);
         playAgainButton = findViewById(R.id.poker_play_again);
+        playAgainButton.setTypeface(typeface);
         Intent intent = getIntent();
         gameMaster = (GameMaster) intent.getSerializableExtra("gameMaster");
+        if (gameMaster.gameOver() == true){
+            playAgainButton.setText(R.string.start_screen_text);
+        }
         computerCard1.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         computerCard2.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
         computerCard3.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(2).getCardPicture(), "drawable", getPackageName()));

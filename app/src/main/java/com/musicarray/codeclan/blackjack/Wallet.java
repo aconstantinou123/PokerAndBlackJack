@@ -34,6 +34,13 @@ public class Wallet implements Serializable {
         this.money = 0;
     }
 
+    public boolean checkValidBet(double bet){
+        if (bet <= getMoney()){
+            return true;
+        }
+        return false;
+    }
+
     public boolean checkWalletEmpty(){
         if (this.money <= 0){
             return true;

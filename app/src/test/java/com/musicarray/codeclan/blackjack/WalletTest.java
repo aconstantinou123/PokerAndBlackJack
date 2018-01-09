@@ -48,4 +48,18 @@ public class WalletTest {
         wallet.setMoney(0);
         assertEquals(true, wallet.checkWalletEmpty());
     }
+
+    @Test
+    public void validBet_True(){
+        wallet.setMoney(200);
+        double bet = 100;
+        assertEquals(true, wallet.checkValidBet(bet));
+    }
+
+    @Test
+    public void validBet_False(){
+        wallet.setMoney(200);
+        double bet = 300;
+        assertEquals(false, wallet.checkValidBet(bet));
+    }
 }
