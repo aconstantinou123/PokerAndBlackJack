@@ -42,4 +42,10 @@ public class WalletTest {
         wallet.removeMoney(200);
         assertEquals(100.0, wallet.getMoney());
     }
+
+    @Test
+    public void walletIsEmpty(){
+        wallet.setMoney(0);
+        assertEquals(true, wallet.checkWalletEmpty());
+    }
 }

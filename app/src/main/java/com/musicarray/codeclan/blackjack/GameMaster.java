@@ -161,5 +161,14 @@ public class GameMaster implements Serializable {
 
     }
 
+    public boolean gameOver(){
+        if (player.getWallet().checkWalletEmpty() == true &&
+                computer.isWinner() == true && player.isWinner() == false){
+            setGameStatus("You lost all your money. Game Over");
+            return true;
+        }
+        return false;
+    }
+
 
 }

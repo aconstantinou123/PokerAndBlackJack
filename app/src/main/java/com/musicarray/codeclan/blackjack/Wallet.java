@@ -33,4 +33,11 @@ public class Wallet implements Serializable {
     public void clearMoney(){
         this.money = 0;
     }
+
+    public boolean checkWalletEmpty(){
+        if (this.money <= 0){
+            return true;
+        }
+        return false;
+    }
 }

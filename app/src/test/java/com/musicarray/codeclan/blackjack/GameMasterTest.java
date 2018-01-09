@@ -335,4 +335,22 @@ public class GameMasterTest {
         gameMaster.checkWinnerPoker();
         assertEquals("Player wins with the highest card", gameMaster.getGameStatus());
     }
+
+    @Test public void canGetGameOver_True(){
+        computer.setWinner(true);
+        player.setWinner(false);
+        player.getWallet().setMoney(0);
+        assertEquals(true, gameMaster.gameOver());
+
+    }
+
+    @Test public void canGetGameOver_False(){
+        computer.setWinner(false);
+        player.setWinner(true);
+        player.getWallet().setMoney(20);
+        assertEquals(false, gameMaster.gameOver());
+
+    }
+
+
 }

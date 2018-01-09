@@ -127,6 +127,7 @@ public class GamePokerActivity extends AppCompatActivity {
                     computer.getBank().addMoney(winnings / 2);
                 }
             gameMaster.getBettingPool().clearMoney();
+            gameMaster.gameOver();
             Intent intent2 = new Intent(this,ResultPokerActivity.class);
             intent2.putExtra("gameMaster",gameMaster);
             startActivity(intent2);
