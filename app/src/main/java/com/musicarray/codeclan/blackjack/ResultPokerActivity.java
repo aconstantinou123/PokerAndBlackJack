@@ -54,9 +54,15 @@ public class ResultPokerActivity extends AppCompatActivity {
         }
         computerCard1.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         computerCard2.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
-        computerCard3.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(2).getCardPicture(), "drawable", getPackageName()));
-        computerCard4.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(3).getCardPicture(), "drawable", getPackageName()));
-        computerCard5.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(4).getCardPicture(), "drawable", getPackageName()));
+        if (gameMaster.getComputer().getHand().getCardsHeld().size() > 2) {
+            computerCard3.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(2).getCardPicture(),"drawable",getPackageName()));
+        }
+        if (gameMaster.getComputer().getHand().getCardsHeld().size() > 3) {
+            computerCard4.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(3).getCardPicture(),"drawable",getPackageName()));
+        }
+        if (gameMaster.getComputer().getHand().getCardsHeld().size() > 4) {
+            computerCard5.setImageResource(getResources().getIdentifier(gameMaster.getComputer().getHand().getCardsHeld().get(4).getCardPicture(),"drawable",getPackageName()));
+        }
         playerCard1.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
         playerCard3.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(2).getCardPicture(), "drawable", getPackageName()));

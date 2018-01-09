@@ -25,6 +25,8 @@ public class ComputerTest {
     Card card6;
     Card card7;
     Card card8;
+    Card card9;
+    Card card10;
 
 
 
@@ -42,6 +44,9 @@ public class ComputerTest {
         card6 = new Card(CardValue.ACE, SuitType.SPADES);
         card7 = new Card(CardValue.ACE, SuitType.HEARTS);
         card8 = new Card(CardValue.TWO, SuitType.DIAMONDS);
+        card9 = new Card(CardValue.QUEEN, SuitType.SPADES);
+        card10 = new Card(CardValue.TEN, SuitType.SPADES);
+
     }
 
     @Test
@@ -72,5 +77,14 @@ public class ComputerTest {
         computer.getHand().addCards(card3);
         computer.getHand().addCards(card4);
         assertNotNull(computer.computerBet(10));
+    }
+
+    @Test
+    public void canCalculateHandStrength(){
+        computer.getHand().addCards(card1);
+        computer.getHand().addCards(card2);
+        computer.getHand().addCards(card3);
+        computer.getHand().addCards(card4);
+        assertNotNull(computer.calculateHandStrength(deck));
     }
 }

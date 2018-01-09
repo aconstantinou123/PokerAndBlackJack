@@ -43,4 +43,8 @@ public class Deck implements Serializable {
         Card topCard = cards.remove(0);
         hand.getCardsHeld().add(topCard);
     }
+
+    public void addCard(Card card){
+        this.cards.add(card);
+    }
 }

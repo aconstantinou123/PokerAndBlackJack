@@ -178,6 +178,7 @@ public class Hand implements Serializable {
 //    }
 
     public int highCard(HashMap<CardValue, Integer> cardstoCheck, int cardCount){
+        int result = 0;
         ArrayList<Integer> resultArray = new ArrayList<>();
         for (Map.Entry<CardValue, Integer> cardValueIntegerEntry : cardstoCheck.entrySet()){
             if (cardValueIntegerEntry.getValue() == cardCount){
@@ -186,7 +187,10 @@ public class Hand implements Serializable {
         }
         Collections.sort(resultArray);
         Collections.reverse(resultArray);
-        return resultArray.get(0);
+        if (resultArray.size() != 0) {
+            result = resultArray.get(0);
+        }
+        return result;
     }
 
     public int checkHand() {

@@ -92,4 +92,22 @@ public class Computer implements Serializable {
         return 5*(Math.round(computerBet/5));
     }
 
+    public double calculateHandStrength(Deck deck){
+        double score = 0;
+        int handSize = this.hand.getHandSize();
+           for (int i = 0; i < 1000; i++){
+               while (hand.getCardsHeld().size() <=4) {
+                   deck.shuffle();
+                   deck.deal(this.hand);
+               }
+               score += hand.checkHand();
+                while (getHand().getHandSize() > handSize){
+                   Card removedCard = hand.getCardsHeld().remove(getHand().getHandSize() - 1);
+                   deck.addCard(removedCard);
+
+                }
+           }
+        return score;
+       }
+
 }
