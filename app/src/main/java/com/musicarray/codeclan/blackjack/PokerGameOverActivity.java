@@ -32,15 +32,7 @@ public class PokerGameOverActivity extends AppCompatActivity {
         returnToStartButton.setTypeface(typeface);
         Intent intent = getIntent();
         player = (Player) intent.getSerializableExtra("player");
-        if (player.getWallet().getMoney() == 200){
-            gameOverText.setText("You finished with " + currencyFormatter.format(player.getWallet().getMoney()) + ". You broke even");
-        }
-        else if(player.getWallet().getMoney() > 200){
-            gameOverText.setText("Well done. You won " + currencyFormatter.format(player.getWallet().getMoney() - 200));
-        }
-        else if (player.getWallet().getMoney() < 200){
-            gameOverText.setText("Bad Luck you lost " + currencyFormatter.format(200 - player.getWallet().getMoney()));
-        }
+        gameOverText.setText(player.checkWinnings());
     }
 
     public void onReturnToStartButtonClicked(View button){

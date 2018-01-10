@@ -1,6 +1,8 @@
 package com.musicarray.codeclan.blackjack;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Created by user on 12/28/17.
@@ -64,5 +66,21 @@ public class Player implements Serializable {
 
     public Integer getHandValue(){
         return hand.getHandValue();
+    }
+
+    public String checkWinnings(){
+        String result = new String();
+        Locale locale = new Locale("en", "GB");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        if (getWallet().getMoney() == 200){
+            result = "You finished with " + currencyFormatter.format(getWallet().getMoney()) + ". You broke even";
+        }
+        else if(getWallet().getMoney() > 200){
+            result = "Well done. You won " + currencyFormatter.format(getWallet().getMoney() - 200);
+        }
+        else if (getWallet().getMoney() < 200){
+            result = "Bad Luck you lost " + currencyFormatter.format(200 - getWallet().getMoney());
+        }
+        return result;
     }
 }

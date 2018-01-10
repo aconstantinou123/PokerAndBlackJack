@@ -1,7 +1,9 @@
 package com.musicarray.codeclan.blackjack;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by user on 12/28/17.
@@ -169,6 +171,5 @@ public class GameMaster implements Serializable {
         }
         return false;
     }
-
 
 }
