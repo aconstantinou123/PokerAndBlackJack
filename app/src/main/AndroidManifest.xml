@@ -20,7 +20,8 @@
         <activity android:name=".ResultActivity" />
         <activity android:name=".PlayerNameActivity" />
         <activity android:name=".GamePokerActivity" />
-        <activity android:name=".ResultPokerActivity"></activity>
+        <activity android:name=".ResultPokerActivity" />
+        <activity android:name=".PokerGameOverActivity"></activity>
     </application>
 
 </manifest>

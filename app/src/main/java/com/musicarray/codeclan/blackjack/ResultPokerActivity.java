@@ -26,6 +26,7 @@ public class ResultPokerActivity extends AppCompatActivity {
     TextView computerName;
     GameMaster gameMaster;
     Button playAgainButton;
+    Button finishButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,8 @@ public class ResultPokerActivity extends AppCompatActivity {
         pokerResult = findViewById(R.id.poker_result_screen);
         playAgainButton = findViewById(R.id.poker_play_again);
         playAgainButton.setTypeface(typeface);
+        finishButton = findViewById(R.id.finish_button);
+        finishButton.setTypeface(typeface);
         Intent intent = getIntent();
         gameMaster = (GameMaster) intent.getSerializableExtra("gameMaster");
         if (gameMaster.gameOver() == true){
@@ -95,5 +98,11 @@ public class ResultPokerActivity extends AppCompatActivity {
             Intent intent = new Intent(this,WelcomeActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void onFinishButtonClicked(View button){
+        Intent intent = new Intent(this, PokerGameOverActivity.class);
+        intent.putExtra("player",gameMaster.getPlayer());
+        startActivity(intent);
     }
 }
