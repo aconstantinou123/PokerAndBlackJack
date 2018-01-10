@@ -303,6 +303,10 @@ public class Hand implements Serializable {
             cardValues.add(card.getPokerValue());
         }
         Collections.sort(cardValues);
+        if (cardValues.contains(14) && cardValues.contains(2) && cardValues.contains(3)
+                && cardValues.contains(4) && cardValues.contains(5)){
+            return true;
+        }
         ArrayList<Integer> resultArray = new ArrayList<>();
         int cardToReturn = cardValues.get(0);
         int firstCardValue = cardValues.remove(0);

@@ -256,6 +256,15 @@ public class HandTest {
 
     }
 
+    @Test public void canCheckForStraightWithAce(){
+        hand.addCards(card7);
+        hand.addCards(card8);
+        hand.addCards(card9);
+        hand.addCards(card10);
+        hand.addCards(card11);
+        assertEquals(true, hand.checkStraight());
+    }
+
     @Test public void canCheckForStraight_False(){
         hand.addCards(card);
         hand.addCards(card9);
