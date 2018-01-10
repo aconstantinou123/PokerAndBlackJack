@@ -9,7 +9,7 @@
     <string name="player_name">Please enter your name</string>
     <string name="continue_text">Play Black Jack</string>
     <string name="preference_file_key">PLAYER</string>
-    <string name="check_winner">Check Winner</string>
+    <string name="check_winner">Reveal Cards</string>
     <string name="play_poker_text">Play Poker</string>
     <string name="fold_text">Fold</string>
     <string name="bet_text">Bet</string>

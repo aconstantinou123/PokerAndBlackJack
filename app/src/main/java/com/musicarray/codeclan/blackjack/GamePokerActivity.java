@@ -73,7 +73,7 @@ public class GamePokerActivity extends AppCompatActivity {
         deck.shuffle();
         computerHand = new Hand();
         computer = new Computer(computerHand);
-        computer.getBank().setMoney(10000);
+        computer.getBank().setMoney(10000000);
         score = new Score();
         gameMaster = new GameMaster(player, computer, score);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
@@ -135,6 +135,9 @@ public class GamePokerActivity extends AppCompatActivity {
                     currentCard += 1;
                     playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
                     bettingPot.setText("Betting Pot: \n" + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
+                    if (currentCard == 5){
+                        checkWinnerButton.setText(R.string.check_winner);
+                    }
                 }
                 else {
                    warningMessage.setText(R.string.warning_message);
