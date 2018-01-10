@@ -12,10 +12,23 @@ import static junit.framework.Assert.assertEquals;
 public class WalletTest {
 
     Wallet wallet;
+    Hand hand;
+    Card card1;
+    Card card2;
+    Card card3;
+    Card card4;
+    Card card5;
+
 
     @Before
     public void before(){
         wallet = new Wallet();
+        hand = new Hand();
+        card1 = new Card(CardValue.KING, SuitType.DIAMONDS);
+        card2 = new Card(CardValue.KING, SuitType.SPADES);
+        card3 = new Card(CardValue.QUEEN, SuitType.SPADES);
+        card4 = new Card(CardValue.FIVE, SuitType.SPADES);
+        card5 = new Card(CardValue.JACK, SuitType.SPADES);
     }
 
     @Test
@@ -61,5 +74,24 @@ public class WalletTest {
         wallet.setMoney(200);
         double bet = 300;
         assertEquals(false, wallet.checkValidBet(bet));
+    }
+
+    @Test
+    public void cantBetAllMoneyBeforeLastRound_False(){
+        hand.addCards(card1);
+        hand.addCards(card2);
+        hand.addCards(card3);
+        wallet.setMoney(200);
+        assertEquals(false, wallet.notAllMoney(200, hand));
+    }
+
+    @Test
+    public void cantBetAllMoneyBeforeLastRound_True(){
+        hand.addCards(card1);
+        hand.addCards(card2);
+        hand.addCards(card3);
+        hand.addCards(card4);
+        wallet.setMoney(200);
+        assertEquals(true, wallet.notAllMoney(200, hand));
     }
 }

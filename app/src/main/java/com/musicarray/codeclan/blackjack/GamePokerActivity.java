@@ -107,7 +107,7 @@ public class GamePokerActivity extends AppCompatActivity {
             try {
                 String betString = moneyToBet.getText().toString();
                 Double bet = Double.parseDouble(betString);
-                if (player.getWallet().checkValidBet(bet) == true) {
+                if (player.getWallet().checkValidBet(bet) == true && player.getWallet().notAllMoney(bet, player.getHand()) == true) {
                     player.getWallet().removeMoney(bet);
                     double computerBet;
                     if (bluff == true){

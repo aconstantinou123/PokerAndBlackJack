@@ -41,6 +41,13 @@ public class Wallet implements Serializable {
         return false;
     }
 
+    public boolean notAllMoney(double bet, Hand hand){
+        if (hand.getHandSize() < 4 && bet == getMoney()){
+            return false;
+        }
+        return true;
+    }
+
     public boolean checkWalletEmpty(){
         if (this.money <= 0){
             return true;
