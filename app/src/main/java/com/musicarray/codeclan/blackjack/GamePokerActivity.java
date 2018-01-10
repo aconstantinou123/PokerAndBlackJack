@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class GamePokerActivity extends AppCompatActivity {
 
@@ -35,11 +37,15 @@ public class GamePokerActivity extends AppCompatActivity {
     GameMaster gameMaster;
     int currentCard;
     ArrayList<ImageView> playerCards;
-
+    boolean bluff;
+    Locale locale;
+    NumberFormat currencyFormatter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_poker);
+        locale = new Locale("en", "GB");
+        currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         currentCard = 2;
         checkWinnerButton = findViewById(R.id.check_winner);
         foldButton = findViewById(R.id.fold_button);
@@ -75,15 +81,17 @@ public class GamePokerActivity extends AppCompatActivity {
         deck.deal(player.getHand());
         deck.deal(computer.getHand());
         deck.deal(computer.getHand());
+        double handStrength = computer.calculateHandStrength(deck);
+        bluff = computer.bluff(handStrength);
         playerName.setText(player.getName());
         playerName.setTypeface(typeface);
         computerName.setTypeface(typeface);
         checkWinnerButton.setTypeface(typeface);
         foldButton.setTypeface(typeface);
         moneyToBet.setTypeface(typeface);
-        bettingPot.setText("Betting Pot: £" + gameMaster.getBettingPool().getMoney());
+        bettingPot.setText("Betting Pot: \n" + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
         bettingPot.setTypeface(typeface);
-        playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
+        playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
         playerWallet.setTypeface(typeface);
         warningMessage.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
@@ -101,13 +109,19 @@ public class GamePokerActivity extends AppCompatActivity {
                 Double bet = Double.parseDouble(betString);
                 if (player.getWallet().checkValidBet(bet) == true) {
                     player.getWallet().removeMoney(bet);
-                    double computerBet = computer.computerBet(bet, deck);
+                    double computerBet;
+                    if (bluff == true){
+                        computerBet = bet*2;
+                    }
+                    else {
+                        computerBet = computer.computerBet(bet,deck);
+                    }
                     computer.getBank().removeMoney(computerBet);
-                    warningMessage.setText("Computer bets £" + computerBet);
+                    warningMessage.setText("Computer bets: " + currencyFormatter.format(computerBet));
                     gameMaster.getBettingPool().addMoney(bet);
                     gameMaster.getBettingPool().addMoney(computerBet);
                     if (computerBet == 0){
-                        gameMaster.setGameStatus("Computer Folds. Player wins £" + gameMaster.getBettingPool().getMoney() + "0");
+                        gameMaster.setGameStatus("Computer Folds. Player wins: " + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
                         double winnings =  gameMaster.getBettingPool().getMoney();
                         player.getWallet().addMoney(winnings);
                         gameMaster.getBettingPool().clearMoney();
@@ -119,8 +133,8 @@ public class GamePokerActivity extends AppCompatActivity {
                     deck.deal(player.getHand());
                     playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(),"drawable",getPackageName()));
                     currentCard += 1;
-                    playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
-                    bettingPot.setText("Betting Pot: £" + gameMaster.getBettingPool().getMoney());
+                    playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
+                    bettingPot.setText("Betting Pot: \n" + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
                 }
                 else {
                    warningMessage.setText(R.string.warning_message);
@@ -152,7 +166,7 @@ public class GamePokerActivity extends AppCompatActivity {
     }
 
     public void onFoldButtonClicked(View button){
-        gameMaster.setGameStatus("Player Folds. Computer wins £" + gameMaster.getBettingPool().getMoney() + "0");
+        gameMaster.setGameStatus("Player Folds. Computer wins: " + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
         double winnings =  gameMaster.getBettingPool().getMoney();
         computer.getBank().addMoney(winnings);
         gameMaster.getBettingPool().clearMoney();

@@ -75,23 +75,6 @@ public class Computer implements Serializable {
         }
     }
 
-//    public double computerBet(double bet) {
-//        double computerBet;
-//        double min = 0.75;
-//        double max = 1.5;
-//        Random r = new Random();
-//        double randomBet = min + (max - min) * r.nextDouble();
-//        if (this.hand.checkHand() > 7) {
-//            computerBet = (bet * 5) * randomBet;
-//        } else if (this.hand.checkHand() > 3) {
-//            computerBet = (bet * 3) * randomBet;
-//        } else if (this.hand.checkHand() > 1) {
-//            computerBet = (bet * 2) / randomBet;
-//        } else {
-//            computerBet = bet * randomBet;
-//        }
-//        return 5*(Math.round(computerBet/5));
-//    }
 
     public double computerBet(double bet, Deck deck){
         double computerBet = 0;
@@ -100,7 +83,7 @@ public class Computer implements Serializable {
         Random r = new Random();
         double handStrength = calculateHandStrength(deck);
         double randomBet = min + (max - min) * r.nextDouble();
-        if (handStrength < 1500){
+        if (handStrength < 1200){
             computerBet = 0;
         }
         else if(handStrength < 2000){
@@ -133,6 +116,17 @@ public class Computer implements Serializable {
                 }
            }
         return score;
+       }
+
+       public boolean bluff(double handStrength){
+        Random r = new Random();
+        int chanceOfBluff = r.nextInt(10) + 1;
+        if (handStrength < 1500){
+            if (chanceOfBluff <= 2){
+                return true;
+                }
+            }
+        return false;
        }
 
 }

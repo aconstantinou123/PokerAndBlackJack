@@ -127,4 +127,9 @@ public class ComputerTest {
         computer.getHand().addCards(card12);
         assertNotNull(computer.calculateHandStrength(deck));
     }
+
+    @Test
+    public void computerCanBluff(){
+        assertNotNull(computer.bluff(1400));
+    }
 }
