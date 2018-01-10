@@ -1,6 +1,7 @@
 package com.musicarray.codeclan.blackjack;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -74,23 +75,47 @@ public class Computer implements Serializable {
         }
     }
 
-    public double computerBet(double bet) {
-        double computerBet;
-        double min = 0.75;
-        double max = 1.5;
+//    public double computerBet(double bet) {
+//        double computerBet;
+//        double min = 0.75;
+//        double max = 1.5;
+//        Random r = new Random();
+//        double randomBet = min + (max - min) * r.nextDouble();
+//        if (this.hand.checkHand() > 7) {
+//            computerBet = (bet * 5) * randomBet;
+//        } else if (this.hand.checkHand() > 3) {
+//            computerBet = (bet * 3) * randomBet;
+//        } else if (this.hand.checkHand() > 1) {
+//            computerBet = (bet * 2) / randomBet;
+//        } else {
+//            computerBet = bet * randomBet;
+//        }
+//        return 5*(Math.round(computerBet/5));
+//    }
+
+    public double computerBet(double bet, Deck deck){
+        double computerBet = 0;
+        double min = 1.0;
+        double max = 2.0;
         Random r = new Random();
+        double handStrength = calculateHandStrength(deck);
         double randomBet = min + (max - min) * r.nextDouble();
-        if (this.hand.checkHand() > 7) {
-            computerBet = (bet * 5) * randomBet;
-        } else if (this.hand.checkHand() > 3) {
-            computerBet = (bet * 3) * randomBet;
-        } else if (this.hand.checkHand() > 1) {
-            computerBet = (bet * 2) / randomBet;
-        } else {
+        if (handStrength < 1500){
+            computerBet = 0;
+        }
+        else if(handStrength < 2000){
             computerBet = bet * randomBet;
+        }
+        else if(handStrength < 3000){
+            computerBet = (bet * 1.5) * randomBet;
+        }
+        else if(handStrength >= 3000){
+            computerBet = (bet * 2) * randomBet;
         }
         return 5*(Math.round(computerBet/5));
     }
+
+
 
     public double calculateHandStrength(Deck deck){
         double score = 0;

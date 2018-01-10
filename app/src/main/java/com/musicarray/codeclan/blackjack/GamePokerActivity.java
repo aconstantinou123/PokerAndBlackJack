@@ -104,7 +104,7 @@ public class GamePokerActivity extends AppCompatActivity {
                 Double bet = Double.parseDouble(betString);
                 if (player.getWallet().checkValidBet(bet) == true) {
                     player.getWallet().removeMoney(bet);
-                    double computerBet = computer.computerBet(bet);
+                    double computerBet = computer.computerBet(bet, deck);
                     computer.getBank().removeMoney(computerBet);
                     gameMaster.getBettingPool().addMoney(bet);
                     gameMaster.getBettingPool().addMoney(computerBet);
