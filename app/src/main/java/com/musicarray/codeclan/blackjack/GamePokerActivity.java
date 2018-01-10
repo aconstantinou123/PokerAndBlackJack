@@ -73,9 +73,6 @@ public class GamePokerActivity extends AppCompatActivity {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
         deck.deal(player.getHand());
         deck.deal(player.getHand());
-        deck.deal(player.getHand());
-        deck.deal(player.getHand());
-        deck.deal(player.getHand());
         deck.deal(computer.getHand());
         deck.deal(computer.getHand());
         playerName.setText(player.getName());
@@ -106,9 +103,20 @@ public class GamePokerActivity extends AppCompatActivity {
                     player.getWallet().removeMoney(bet);
                     double computerBet = computer.computerBet(bet, deck);
                     computer.getBank().removeMoney(computerBet);
+                    warningMessage.setText("Computer bets £" + computerBet);
                     gameMaster.getBettingPool().addMoney(bet);
                     gameMaster.getBettingPool().addMoney(computerBet);
+                    if (computerBet == 0){
+                        gameMaster.setGameStatus("Computer Folds. Player wins £" + gameMaster.getBettingPool().getMoney() + "0");
+                        double winnings =  gameMaster.getBettingPool().getMoney();
+                        player.getWallet().addMoney(winnings);
+                        gameMaster.getBettingPool().clearMoney();
+                        Intent intent2 = new Intent(this, ResultPokerActivity.class);
+                        intent2.putExtra("gameMaster", gameMaster);
+                        startActivity(intent2);
+                    }
                     deck.deal(computer.getHand());
+                    deck.deal(player.getHand());
                     playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(),"drawable",getPackageName()));
                     currentCard += 1;
                     playerWallet.setText("Player Wallet: £" + player.getWallet().getMoney());
@@ -119,7 +127,7 @@ public class GamePokerActivity extends AppCompatActivity {
                 }
             }
             catch (NumberFormatException e){
-                playerWallet.setText("Invalid Amount");
+                warningMessage.setText("Invalid Amount");
             }
         }
         else {

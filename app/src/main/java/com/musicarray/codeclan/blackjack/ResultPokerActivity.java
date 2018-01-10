@@ -65,9 +65,15 @@ public class ResultPokerActivity extends AppCompatActivity {
         }
         playerCard1.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
-        playerCard3.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(2).getCardPicture(), "drawable", getPackageName()));
-        playerCard4.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(3).getCardPicture(), "drawable", getPackageName()));
-        playerCard5.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(4).getCardPicture(), "drawable", getPackageName()));
+        if (gameMaster.getPlayer().getHand().getCardsHeld().size() > 2) {
+            playerCard3.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(2).getCardPicture(),"drawable",getPackageName()));
+        }
+        if (gameMaster.getComputer().getHand().getCardsHeld().size() > 3) {
+            playerCard4.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(3).getCardPicture(),"drawable",getPackageName()));
+        }
+        if (gameMaster.getComputer().getHand().getCardsHeld().size() > 4) {
+            playerCard5.setImageResource(getResources().getIdentifier(gameMaster.getPlayer().getHand().getCardsHeld().get(4).getCardPicture(),"drawable",getPackageName()));
+        }
         playerName.setText(gameMaster.getPlayer().getName());
         playerName.setTypeface(typeface);
         pokerResult.setText(gameMaster.getGameStatus());
