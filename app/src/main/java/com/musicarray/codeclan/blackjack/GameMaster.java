@@ -172,4 +172,21 @@ public class GameMaster implements Serializable {
         return false;
     }
 
+    public String blackJackResult(){
+        String result = new String();
+        if (getScore().getPlayerScore() == getScore().getComputerScore()){
+            result = "Computer: " + getScore().getComputerScore() + "\n" + getPlayer().getName() + ": "
+            + getScore().getPlayerScore() + "\n\n" + "It's a draw";
+        }
+        else if (getScore().getComputerScore() > getScore().getPlayerScore()){
+            result = "Computer: " + getScore().getComputerScore() + "\n" + getPlayer().getName() + ": "
+                    + getScore().getPlayerScore() + "\n\n" + "Computer wins!";
+        }
+        else if (getScore().getPlayerScore() > getScore().getComputerScore()){
+            result ="Computer: " + getScore().getComputerScore() + "\n" + getPlayer().getName() + ": "
+                    + getScore().getPlayerScore() + "\n\n" + getPlayer().getName() + " wins!";
+        }
+        return result;
+    }
+
 }

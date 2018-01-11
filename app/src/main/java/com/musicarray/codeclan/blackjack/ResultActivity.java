@@ -77,7 +77,8 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void onStartButtonClicked(View button){
-        Intent intent = new Intent(this, WelcomeActivity.class);
+        Intent intent = new Intent(this, BlackJackGameOverActivity.class);
+        intent.putExtra("gameMaster", gameMaster);
         startActivity(intent);
     }
 }

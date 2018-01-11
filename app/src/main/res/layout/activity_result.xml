@@ -159,7 +159,7 @@
         android:layout_marginTop="484dp"
         android:background="@drawable/pokerchipbutton"
         android:onClick="onStartButtonClicked"
-        android:text="@string/return_to_start_text"
+        android:text="@string/finish_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
