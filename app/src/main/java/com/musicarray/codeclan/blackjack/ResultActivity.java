@@ -25,6 +25,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView playerScore;
     TextView computerScore;
     Button playAgainButton;
+    Button returnToStartButton;
     GridView gridViewPlayer;
     GridView gridViewComputer;
     ImageAdapter playerImageAdaptor;
@@ -44,6 +45,8 @@ public class ResultActivity extends AppCompatActivity {
         gameState.setTypeface(typeface);
         playAgainButton = findViewById(R.id.play_again_button);
         playAgainButton.setTypeface(typeface);
+        returnToStartButton = findViewById(R.id.start_button);
+        returnToStartButton.setTypeface(typeface);
         gridViewPlayer = findViewById(R.id.result_gridview_player);
         gridViewComputer = findViewById(R.id.result_gridview_computer);
         Intent intent = getIntent();
@@ -59,7 +62,7 @@ public class ResultActivity extends AppCompatActivity {
         playerScore.setTypeface(typeface);
         computerScore = findViewById(R.id.computer_score);
         computerScore.setTypeface(typeface);
-        playerScore.setText("Player \nscore: " + gameMaster.getScore().getPlayerScore().toString());
+        playerScore.setText("Player score: " + gameMaster.getScore().getPlayerScore().toString());
         computerScore.setText("Computer score: " + gameMaster.getScore().getComputerScore().toString());
 
     }
@@ -69,6 +72,11 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("player", gameMaster.getPlayer());
         intent.putExtra("score", gameMaster.getScore());
+        startActivity(intent);
+    }
+
+    public void onStartButtonClicked(View button){
+        Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }
 }
