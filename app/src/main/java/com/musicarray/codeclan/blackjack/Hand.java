@@ -141,41 +141,6 @@ public class Hand implements Serializable {
             return cardValueCount;
     }
 
-//    public int findHighestCard(){
-//        ArrayList<Integer> winningCards = new ArrayList<>();
-//        for (Card card : cardsHeld){
-//            if (card.isWinningCard() == true){
-//                winningCards.add(card.getPokerValue());
-//            }
-//        }
-//        Collections.sort(winningCards);
-//        Collections.reverse(winningCards);
-//        return  winningCards.get(0);
-
-//        Set<CardValue> keys = cardValueCount.keySet();
-//        ArrayList<Integer> highestCards = new ArrayList<>();
-//        for (CardValue cardValue : keys){
-//            highestCards.add(cardValue.getPokerValue());
-//        }
-//        Collections.sort(highestCards);
-//        Collections.reverse(highestCards);
-//        return  highestCards.get(0);
-//    }
-
-//    public HashMap<CardValue, Integer> sortValues(HashMap<CardValue, Integer> map){
-//        Object[] a = map.entrySet().toArray();
-//        Arrays.sort(a, new Comparator() {
-//            public int compare(Object o1, Object o2) {
-//                return ((Map.Entry<CardValue, Integer>) o2).getValue()
-//                        .compareTo(((Map.Entry<CardValue, Integer>) o1).getValue());
-//            }
-//        });
-//        HashMap<CardValue, Integer> resultHash = new HashMap<>();
-//        for (Object e : a) {
-//            resultHash.put(((Map.Entry<CardValue, Integer>) e).getKey(),((Map.Entry<CardValue, Integer>) e).getValue());
-//        }
-//        return resultHash;
-//    }
 
     public int highCard(HashMap<CardValue, Integer> cardstoCheck, int cardCount){
         int result = 0;

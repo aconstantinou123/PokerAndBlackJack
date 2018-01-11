@@ -69,6 +69,7 @@ public class ResultActivity extends AppCompatActivity {
 
     public void onPlayAgainButtonClicked(View button){
         gameMaster.getPlayer().getHand().clearHand();
+        gameMaster.getPlayer().setHoldStatus(false);
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("player", gameMaster.getPlayer());
         intent.putExtra("score", gameMaster.getScore());
