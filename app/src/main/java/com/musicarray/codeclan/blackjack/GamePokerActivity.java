@@ -29,6 +29,11 @@ public class GamePokerActivity extends AppCompatActivity {
     ImageView playerCard3;
     ImageView playerCard4;
     ImageView playerCard5;
+    ImageView computerCard1;
+    ImageView computerCard2;
+    ImageView computerCard3;
+    ImageView computerCard4;
+    ImageView computerCard5;
     Deck deck;
     Player player;
     Hand computerHand;
@@ -37,6 +42,7 @@ public class GamePokerActivity extends AppCompatActivity {
     GameMaster gameMaster;
     int currentCard;
     ArrayList<ImageView> playerCards;
+    ArrayList<ImageView> computerCards;
     boolean bluff;
     Locale locale;
     NumberFormat currencyFormatter;
@@ -60,12 +66,23 @@ public class GamePokerActivity extends AppCompatActivity {
         playerCard3 = findViewById(R.id.player_card_3);
         playerCard4 = findViewById(R.id.player_card_4);
         playerCard5 = findViewById(R.id.player_card_5);
+        computerCard1 = findViewById(R.id.computer_card_1);
+        computerCard2 = findViewById(R.id.computer_card_2);
+        computerCard3 = findViewById(R.id.computer_card_3);
+        computerCard4 = findViewById(R.id.computer_card_4);
+        computerCard5 = findViewById(R.id.computer_card_5);
         playerCards = new ArrayList<>();
         playerCards.add(playerCard1);
         playerCards.add(playerCard2);
         playerCards.add(playerCard3);
         playerCards.add(playerCard4);
         playerCards.add(playerCard5);
+        computerCards = new ArrayList<>();
+        computerCards.add(computerCard1);
+        computerCards.add(computerCard2);
+        computerCards.add(computerCard3);
+        computerCards.add(computerCard4);
+        computerCards.add(computerCard5);
         Intent intent = getIntent();
         player = (Player) intent.getSerializableExtra("player");
         deck = new Deck();
@@ -96,9 +113,8 @@ public class GamePokerActivity extends AppCompatActivity {
         warningMessage.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
-        playerCard3.setImageResource(R.drawable.playingcardback);
-        playerCard4.setImageResource(R.drawable.playingcardback);
-        playerCard5.setImageResource(R.drawable.playingcardback);
+        computerCard1.setImageResource(getResources().getIdentifier("playingcardback", "drawable", getPackageName()));
+        computerCard2.setImageResource(getResources().getIdentifier("playingcardback", "drawable", getPackageName()));
     }
 
     public void onCheckWinnerButtonClicked(View button){
@@ -132,6 +148,7 @@ public class GamePokerActivity extends AppCompatActivity {
                     deck.deal(computer.getHand());
                     deck.deal(player.getHand());
                     playerCards.get(currentCard).setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(currentCard).getCardPicture(),"drawable",getPackageName()));
+                    computerCards.get(currentCard).setImageResource(getResources().getIdentifier("playingcardback", "drawable", getPackageName()));
                     currentCard += 1;
                     playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
                     bettingPot.setText("Betting Pot: \n" + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));

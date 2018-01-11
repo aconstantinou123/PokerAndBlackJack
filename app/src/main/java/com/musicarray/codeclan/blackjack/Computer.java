@@ -83,7 +83,7 @@ public class Computer implements Serializable {
         Random r = new Random();
         double handStrength = calculateHandStrength(deck);
         double randomBet = min + (max - min) * r.nextDouble();
-        if (handStrength < 1200){
+        if (handStrength < 1250){
             computerBet = 0;
         }
         else if(handStrength < 2000){
