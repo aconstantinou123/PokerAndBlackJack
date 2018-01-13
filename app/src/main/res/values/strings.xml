@@ -17,4 +17,6 @@
     <string name="warning_message">Not Enough Money - min £10</string>
     <string name="finish_text">Finish</string>
     <string name="return_to_start_text">Return To Start</string>
+    <string name="computer_raise_text">Computer Raises!</string>
+    <string name="raise_text">Raise</string>
 </resources>

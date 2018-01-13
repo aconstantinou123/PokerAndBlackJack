@@ -1,7 +1,9 @@
 package com.musicarray.codeclan.blackjack;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -124,16 +126,57 @@ public class GamePokerActivity extends AppCompatActivity {
             computerBet.setText("");
             try {
                 String betString = moneyToBet.getText().toString();
-                Double bet = Double.parseDouble(betString);
+                final Double bet = Double.parseDouble(betString);
                 if (player.getWallet().checkValidBet(bet) == true && player.getWallet().notAllMoney(bet, player.getHand()) == true) {
                     player.getWallet().removeMoney(bet);
-                    double computerBet;
+                    final double computerBet;
                     if (bluff == true){
                         computerBet = bet*2;
                     }
                     else {
                         computerBet = computer.computerBet(bet,deck);
                     }
+                        if (computerBet > bet) {
+                            computer.setComputerAction(ComputerAction.RAISEPLAYER);
+                            Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(GamePokerActivity.this);
+                            View view = getLayoutInflater().inflate(R.layout.raise_dialog_box, null);
+                            TextView computerRaise = view.findViewById(R.id.computer_raise);
+                            computerRaise.setTypeface(typeface);
+                            TextView computerRaiseMessage = view.findViewById(R.id.computer_raises_message);
+                            computerRaiseMessage.setTypeface(typeface);
+                            computerRaiseMessage.setText("Computer raises by " + currencyFormatter.format(computerBet - bet));
+                            Button raiseButton = view.findViewById(R.id.raise_alert_button);
+                            raiseButton.setTypeface(typeface);
+                            Button foldButtonAlert = view.findViewById(R.id.fold_alert_button);
+                            foldButtonAlert.setTypeface(typeface);
+                            builder.setView(view);
+                            final AlertDialog dialog = builder.create();
+                            dialog.show();
+                            raiseButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    double increaseBet = computerBet - bet;
+                                    player.getWallet().removeMoney(increaseBet);
+                                    gameMaster.getBettingPool().addMoney(increaseBet);
+                                    playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
+                                    bettingPot.setText("Betting Pot: \n" + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
+                                    dialog.dismiss();
+                                }
+                            });
+                            foldButtonAlert.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    gameMaster.setGameStatus("Player Folds. Computer wins: " + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
+                                    double winnings = gameMaster.getBettingPool().getMoney();
+                                    computer.getBank().addMoney(winnings);
+                                    gameMaster.getBettingPool().clearMoney();
+                                    Intent intent2 = new Intent(GamePokerActivity.this,ResultPokerActivity.class);
+                                    intent2.putExtra("gameMaster",gameMaster);
+                                    startActivity(intent2);
+                                }
+                            });
+                        }
                     computer.getBank().removeMoney(computerBet);
                     this.computerBet.setText("Computer bets: " + currencyFormatter.format(computerBet));
                     gameMaster.getBettingPool().addMoney(bet);
