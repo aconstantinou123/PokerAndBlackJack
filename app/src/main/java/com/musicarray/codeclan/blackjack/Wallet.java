@@ -35,7 +35,7 @@ public class Wallet implements Serializable {
     }
 
     public boolean checkValidBet(double bet){
-        if (bet <= getMoney()){
+        if (bet <= getMoney() && bet >= 10){
             return true;
         }
         return false;

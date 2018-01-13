@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class GamePokerActivity extends AppCompatActivity {
     Button checkWinnerButton;
     Button foldButton;
     EditText moneyToBet;
-    TextView warningMessage;
+    TextView computerBet;
     TextView playerName;
     TextView computerName;
     TextView playerWallet;
@@ -46,6 +47,7 @@ public class GamePokerActivity extends AppCompatActivity {
     boolean bluff;
     Locale locale;
     NumberFormat currencyFormatter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class GamePokerActivity extends AppCompatActivity {
         computerName = findViewById(R.id.computer_poker_name);
         moneyToBet = findViewById(R.id.money_to_bet);
         bettingPot = findViewById(R.id.betting_pot);
-        warningMessage = findViewById(R.id.warning_message);
+        computerBet = findViewById(R.id.computer_bet);
         playerWallet = findViewById(R.id.player_wallet);
         playerCard1 = findViewById(R.id.player_card_1);
         playerCard2 = findViewById(R.id.player_card_2);
@@ -110,7 +112,7 @@ public class GamePokerActivity extends AppCompatActivity {
         bettingPot.setTypeface(typeface);
         playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
         playerWallet.setTypeface(typeface);
-        warningMessage.setTypeface(typeface);
+        computerBet.setTypeface(typeface);
         playerCard1.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(0).getCardPicture(), "drawable", getPackageName()));
         playerCard2.setImageResource(getResources().getIdentifier(player.getHand().getCardsHeld().get(1).getCardPicture(), "drawable", getPackageName()));
         computerCard1.setImageResource(getResources().getIdentifier("playingcardback", "drawable", getPackageName()));
@@ -119,7 +121,7 @@ public class GamePokerActivity extends AppCompatActivity {
 
     public void onCheckWinnerButtonClicked(View button){
         if (currentCard < 5){
-            warningMessage.setText("");
+            computerBet.setText("");
             try {
                 String betString = moneyToBet.getText().toString();
                 Double bet = Double.parseDouble(betString);
@@ -133,7 +135,7 @@ public class GamePokerActivity extends AppCompatActivity {
                         computerBet = computer.computerBet(bet,deck);
                     }
                     computer.getBank().removeMoney(computerBet);
-                    warningMessage.setText("Computer bets: " + currencyFormatter.format(computerBet));
+                    this.computerBet.setText("Computer bets: " + currencyFormatter.format(computerBet));
                     gameMaster.getBettingPool().addMoney(bet);
                     gameMaster.getBettingPool().addMoney(computerBet);
                     if (computerBet == 0){
@@ -157,11 +159,11 @@ public class GamePokerActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                   warningMessage.setText(R.string.warning_message);
+                    Toast.makeText(this, "Not enough money - min £10", Toast.LENGTH_LONG).show();
                 }
             }
             catch (NumberFormatException e){
-                warningMessage.setText("Invalid Amount");
+                Toast.makeText(this, "Invalid Amount", Toast.LENGTH_LONG).show();
             }
         }
         else {
