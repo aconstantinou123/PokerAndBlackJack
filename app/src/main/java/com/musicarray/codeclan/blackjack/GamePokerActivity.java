@@ -206,7 +206,7 @@ public class GamePokerActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(this, "Not enough money - min £10", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Not enough money", Toast.LENGTH_LONG).show();
                 }
             }
             catch (NumberFormatException e){
