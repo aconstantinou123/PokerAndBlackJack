@@ -122,15 +122,7 @@ public class GamePokerActivity extends AppCompatActivity {
     }
 
     public void onCheckWinnerButtonClicked(View button){
-        if (player.getWallet().getMoney() == 0 && currentCard < 5){
-            computer.setWinner(true);
-            player.setWinner(false);
-            gameMaster.gameOver();
-            Intent intent2 = new Intent(this,ResultPokerActivity.class);
-            intent2.putExtra("gameMaster",gameMaster);
-            startActivity(intent2);
-        }
-        else if (currentCard < 5){
+         if (currentCard < 5){
             computerBet.setText("");
             try {
                 String betString = moneyToBet.getText().toString();
@@ -243,6 +235,14 @@ public class GamePokerActivity extends AppCompatActivity {
     }
 
     public void onFoldButtonClicked(View button){
+        if (player.getWallet().getMoney() == 0 && currentCard < 5){
+            computer.setWinner(true);
+            player.setWinner(false);
+            gameMaster.gameOver();
+            Intent intent2 = new Intent(this,ResultPokerActivity.class);
+            intent2.putExtra("gameMaster",gameMaster);
+            startActivity(intent2);
+        }
         gameMaster.setGameStatus("Player Folds. Computer wins: " + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
         double winnings =  gameMaster.getBettingPool().getMoney();
         computer.getBank().addMoney(winnings);
