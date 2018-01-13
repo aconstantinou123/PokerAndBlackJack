@@ -122,12 +122,20 @@ public class GamePokerActivity extends AppCompatActivity {
     }
 
     public void onCheckWinnerButtonClicked(View button){
-        if (currentCard < 5){
+        if (player.getWallet().getMoney() == 0 && currentCard < 5){
+            computer.setWinner(true);
+            player.setWinner(false);
+            gameMaster.gameOver();
+            Intent intent2 = new Intent(this,ResultPokerActivity.class);
+            intent2.putExtra("gameMaster",gameMaster);
+            startActivity(intent2);
+        }
+        else if (currentCard < 5){
             computerBet.setText("");
             try {
                 String betString = moneyToBet.getText().toString();
                 final Double bet = Double.parseDouble(betString);
-                if (player.getWallet().checkValidBet(bet) == true && player.getWallet().notAllMoney(bet, player.getHand()) == true) {
+                if (player.getWallet().checkValidBet(bet) == true) {
                     player.getWallet().removeMoney(bet);
                     final double computerBet;
                     if (bluff == true){
@@ -137,13 +145,12 @@ public class GamePokerActivity extends AppCompatActivity {
                         computerBet = computer.computerBet(bet,deck);
                     }
                         if (computerBet > bet) {
-                            computer.setComputerAction(ComputerAction.RAISEPLAYER);
                             Typeface typeface = Typeface.createFromAsset(getAssets(), "PlayfairDisplay-Regular.otf");
                             final AlertDialog.Builder builder = new AlertDialog.Builder(GamePokerActivity.this);
                             View view = getLayoutInflater().inflate(R.layout.raise_dialog_box, null);
                             TextView computerRaise = view.findViewById(R.id.computer_raise);
                             computerRaise.setTypeface(typeface);
-                            TextView computerRaiseMessage = view.findViewById(R.id.computer_raises_message);
+                            final TextView computerRaiseMessage = view.findViewById(R.id.computer_raises_message);
                             computerRaiseMessage.setTypeface(typeface);
                             computerRaiseMessage.setText("Computer raises by " + currencyFormatter.format(computerBet - bet));
                             Button raiseButton = view.findViewById(R.id.raise_alert_button);
@@ -157,11 +164,16 @@ public class GamePokerActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     double increaseBet = computerBet - bet;
-                                    player.getWallet().removeMoney(increaseBet);
-                                    gameMaster.getBettingPool().addMoney(increaseBet);
-                                    playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
-                                    bettingPot.setText("Betting Pot: \n" + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
-                                    dialog.dismiss();
+                                     if (player.getWallet().checkValidBet(increaseBet) == false){
+                                         computerRaiseMessage.setText("Not enough money. Player must fold");
+                                     }
+                                     else {
+                                         player.getWallet().removeMoney(increaseBet);
+                                         gameMaster.getBettingPool().addMoney(increaseBet);
+                                         playerWallet.setText("Player Wallet: \n" + currencyFormatter.format(player.getWallet().getMoney()));
+                                         bettingPot.setText("Betting Pot: \n" + currencyFormatter.format(gameMaster.getBettingPool().getMoney()));
+                                         dialog.dismiss();
+                                     }
                                 }
                             });
                             foldButtonAlert.setOnClickListener(new View.OnClickListener() {

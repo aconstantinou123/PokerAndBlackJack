@@ -15,7 +15,6 @@ public class Computer implements Serializable {
     private String computerStatus;
     private Wallet bank;
     private boolean winner;
-    private ComputerAction computerAction;
 
     public Computer(Hand hand) {
             this.hand = hand;
@@ -23,16 +22,7 @@ public class Computer implements Serializable {
             this.computerStatus = "";
             this.bank = new Wallet();
             this.winner = false;
-            this.computerAction = ComputerAction.MEETPLAYER;
         }
-
-    public ComputerAction getComputerAction() {
-        return computerAction;
-    }
-
-    public void setComputerAction(ComputerAction computerAction) {
-        this.computerAction = computerAction;
-    }
 
     public boolean isWinner() {
         return winner;

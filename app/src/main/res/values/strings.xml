@@ -14,7 +14,7 @@
     <string name="fold_text">Fold</string>
     <string name="bet_text">Bet</string>
     <string name="start_screen_text">Return to Start</string>
-    <string name="warning_message">Not Enough Money - min £10</string>
+    <string name="warning_message">Not Enough Money</string>
     <string name="finish_text">Finish</string>
     <string name="return_to_start_text">Return To Start</string>
     <string name="computer_raise_text">Computer Raises!</string>
