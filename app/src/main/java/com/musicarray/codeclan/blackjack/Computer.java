@@ -89,6 +89,9 @@ public class Computer implements Serializable {
         else if(handStrength < 1500){
             computerBet = bet;
         }
+        else if(handStrength < 2250){
+            computerBet = (bet * 1.2) * randomBet;
+        }
         else if(handStrength < 3000){
             computerBet = (bet * 1.5) * randomBet;
         }
