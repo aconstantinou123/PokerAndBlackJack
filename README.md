@@ -8,8 +8,9 @@ Getting Started
 New users need to first pull the code down from github and ensure that they have Android Studio installed
 
 Prerequisites
-Android Studio with an emulator setup
-(optional) IF you wish to install and run the app on your phone you will also need a USB data cable and a phone with development mode enabled
+
+1. Android Studio with an emulator setup
+2. (optional) If you wish to install and run the app on your phone you will also need a USB data cable and a phone with development mode enabled
 
 Installing
 1. Pull the code down off of github using "git clone" in the terminal
