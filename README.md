@@ -23,7 +23,7 @@ BlackJack
 Players start with two cards and the ability to see one of the computers cards. Players must try to get 21 or as close to 21 as possible. They can chose hit to recieve another card or hold to keep their current cards. Play will continue until somebody goes over, gets 21 or both players hold. A score keeps track of the games won by the computer and the player
 
 Poker
-Players start with two cards. They can then make an initial bet or fold. The computer will then bet and either bet the same or higher than the player. The player can then choose to match the computer or fold. This pattern continues untill 5 cards are dealt or 1 player folds. The winnings are then transferred to the winning player. Players can choose to play again or finish. If they play again their money will be transferred over to the new game.
+Players start with two cards. They can then make an initial bet or fold. The computer will then bet. The computers bet will be eiher the the same as the player or higher. The player can then choose to match the computer or fold. This pattern continues until 5 cards are dealt or 1 player folds. The winnings are then transferred to the winning player. Players can choose to play again or finish. If they play again their money will be transferred over to the new game.
 
 Authors
 
